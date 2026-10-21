@@ -1,0 +1,25 @@
+# HOUSE603 Ventures
+
+> Remote studio for business technology. We deliver custom software, digital transformation, and project management, plus retainer-based security governance for growing companies.
+
+HOUSE603 is remote-first and works with teams worldwide. Contact: info@house603.com, WhatsApp +234 809 025 9050.
+
+## Core practices
+- Digital Transformation: custom software and automation that replace manual operations.
+- Project Management: scoping, delivery, and accountability for complex builds.
+- Information Security: protection built in from the first commit, extended by the retainer services below.
+
+## Security and governance (retainer)
+- Fractional vCISO: part-time senior security leadership; strategy, risk, policy, and reporting.
+- Compliance and Audit Readiness: SOC 2, ISO 27001, ISO 42001, and ISO/IEC 27701:2025 readiness, from gap assessment to audit support.
+- Continuous Cloud and Threat Governance: monitoring and cloud security across AWS, Azure, and GCP.
+- ISO 42001: AI management-system governance for teams building with AI.
+- ISO/IEC 27701:2025: privacy information management system (PIMS) readiness for PII controllers and processors.
+
+The security practice is led by certified practitioners (CISSP, CISM, ISO 27001/42001 Lead Auditor).
+
+## Pages
+- Home: https://house603.com/
+- Services: https://house603.com/services.html
+- About: https://house603.com/about.html
+- Contact: https://house603.com/contact.html

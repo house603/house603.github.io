@@ -1,0 +1,91 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0b0a09"><meta name="google-adsense-account" content="ca-pub-9118555801196013"><meta name="description" content="How to pre-render, cache at the edge, and isolate the few endpoints that truly need a server, with cache-control, nginx, and stale-while-revalidate examples from the HOUSE603 team."><title>Static-First Web Architecture: Ship Fast Sites That Survive Traffic Spikes | HOUSE603</title><link rel="canonical" href="https://house603.com/technuggets/static-first-architecture/"><meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"><meta name="author" content="Omobolade Odeniyi, HOUSE603 Ventures"><meta name="keywords" content="static site, edge caching, CDN, cache-control, stale-while-revalidate, Core Web Vitals, nginx, security headers"><link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><meta property="og:type" content="article"><meta property="og:url" content="https://house603.com/technuggets/static-first-architecture/"><meta property="og:title" content="Static-First Web Architecture: Ship Fast Sites That Survive Traffic Spikes"><meta property="og:description" content="Pre-render, cache at the edge, and isolate the endpoints that truly need a server."><meta property="og:image" content="https://house603.com/og-image.png"><meta property="og:site_name" content="HOUSE603"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Static-First Web Architecture"><meta name="twitter:image" content="https://house603.com/og-image.png"><link rel="stylesheet" href="/styles.css?v=79376db0"><link rel="stylesheet" href="/article.css?v=1"></head><body>
+<div id="prog" class="prog"></div><div class="bg"></div><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="grain"></div>
+<nav class="bar" id="nav"><a href="/" aria-label="HOUSE603 home"><img class="logo" src="/logo.png" alt="HOUSE603"></a><ul id="menu"><li><a href="/">Home</a></li><li><a href="/about.html">About</a></li><li><a href="/services.html">Services</a></li><li><a href="/articles/" class="active">Articles</a></li><li><a href="/contact.html">Contact</a></li><li><a href="#" class="navcta" data-cta>Work with us</a></li></ul><button class="burger" id="burger" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button></nav>
+
+<main class="article-main"><div class="wrap"><article class="article">
+  <nav class="crumb" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep">/</span><a href="/articles/">Articles</a><span class="sep">/</span><span class="here">Web Architecture</span></nav>
+  <span class="kicker">Web Architecture</span>
+  <h1>Static-First Web Architecture: Ship Fast Sites That Survive Traffic Spikes</h1>
+  <div class="byline"><span class="avatar">OO</span><span class="who"><b>Omobolade Odeniyi</b><span>Lead Contributor, HOUSE603 &middot; ISO/IEC 27001, 27701</span></span></div>
+  <div class="meta-line">Published 26 Aug 2026 &middot; Updated 16 Sep 2026 &middot; 7 min read</div>
+
+  <aside class="quick-answer"><div class="qa-label">Quick answer</div><p>Static-first means you render pages to plain HTML at build time, serve them from a CDN edge near the reader, and keep servers only for the handful of endpoints that genuinely have to compute on every request. You get pages that load in well under a second, a site that barely notices a traffic spike, almost nothing for an attacker to poke at, and a hosting bill you round to the nearest dollar. The mindset behind it is simple. Make dynamic behaviour something you justify, not something you reach for by default.</p></aside>
+
+  <div class="article-body">
+    <p>Most sites are dynamic out of habit rather than need. A page that changes a few times a day gets rebuilt from a database on every single request, which drags in an application server, a connection pool, and a scaling headache, all for content that could have been a plain file on disk. Static-first flips that default. Render the page once, cache it everywhere, and reach for a server only when the request truly cannot be answered ahead of time. We build this way on purpose: the main HOUSE603 site and this one are both single files served from the edge, which is most of why they load the instant you click.</p>
+
+    <h2>The shape of a static-first stack</h2>
+    <ul>
+      <li><strong>Build step</strong> renders pages to HTML with hashed asset filenames.</li>
+      <li><strong>CDN edge</strong> serves those files from the location nearest each visitor.</li>
+      <li><strong>Thin dynamic layer</strong>, an edge function or a small API, handles the genuinely per-user parts such as search, forms, or a cart.</li>
+    </ul>
+    <p>Knowing when not to do this matters just as much. If most of a page is unique to each logged-in user and changes on every view, you are fighting the model, and honest server rendering is the right call for that page. Static-first is for the large majority of pages that look the same for everyone, which is more of your site than you probably think: marketing, docs, blog, product listings, most of a dashboard's shell.</p>
+
+    <div class="adslot adslot--rect" aria-hidden="true"><span class="ad-label">Advertisement</span><ins class="adsbygoogle" style="display:block" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+
+    <h2>Cache-control is where the speed comes from</h2>
+    <p>Caching is the whole reason static-first is fast, so it is worth getting exactly right, and it comes down to two classes of asset with two policies. Fingerprinted assets, the ones whose filename carries a content hash, cannot change without changing their name, so you cache them effectively forever. HTML does change, so you let the CDN revalidate it while it keeps handing back the last good copy the instant anyone asks:</p>
+    <pre><code># Immutable, hashed assets: app.9f2a1c.js, styles.4b8e.css
+Cache-Control: public, max-age=31536000, immutable
+
+# HTML: fast, but always fresh behind the scenes
+Cache-Control: public, max-age=0, s-maxage=600, stale-while-revalidate=86400</code></pre>
+    <p>The <code>s-maxage</code> line tells the CDN to hold the page for ten minutes. The <code>stale-while-revalidate</code> line is the part people miss: for a full day after that, the edge is allowed to hand back the slightly stale page immediately while it fetches a fresh copy in the background. Readers never sit waiting on your origin, and your origin barely gets touched. The one tax you pay is cache invalidation, so when you need a change out now rather than in ten minutes, purge the specific paths through your CDN's API as the last step of the deploy.</p>
+
+    <h2>A minimal edge-friendly origin</h2>
+    <p>Whatever sits behind the CDN should be boring and correct. An nginx origin for a static bundle is a dozen lines:</p>
+    <pre><code>server {
+  listen 443 ssl http2;
+  root /var/www/site;
+
+  # hashed assets never change
+  location ~* "\.[0-9a-f]{6,}\.(js|css|woff2|png|svg)$" {
+    add_header Cache-Control "public, max-age=31536000, immutable";
+  }
+  # html revalidated, SPA-style fallback
+  location / {
+    add_header Cache-Control "public, max-age=0, s-maxage=600, stale-while-revalidate=86400";
+    try_files $uri $uri/ /index.html;
+  }
+}</code></pre>
+
+    <h2>Keep the dynamic parts honest</h2>
+    <p>Put anything that truly runs per request behind its own path, say <code>/api/</code>, so it scales, fails, and gets rate-limited on its own without ever taking the cached site down with it. If the API has a bad day, the pages still load from the edge and the site degrades to read-only instead of going dark. On the client, show what you already have instantly and refresh it in place:</p>
+    <pre><code>async function load(url) {
+  const cached = sessionStorage.getItem(url);
+  if (cached) render(JSON.parse(cached));   // show instantly
+  const res = await fetch(url, { headers: { 'Accept': 'application/json' } });
+  const data = await res.json();
+  sessionStorage.setItem(url, JSON.stringify(data)); // refresh in place
+  render(data);
+}</code></pre>
+
+    <h2>Ship the security headers for free</h2>
+    <p>A static origin makes a strict <code>Content-Security-Policy</code> genuinely achievable, because you control every script that loads and nothing injects markup at runtime. Set HSTS, a tight CSP, <code>X-Content-Type-Options: nosniff</code>, and a sensible frame policy at the edge, and you have closed off whole categories of attack that dynamic apps spend real effort fighting. There is no database in the request path to inject into and no server-side template to trick.</p>
+
+    <h3>What you get</h3>
+    <p>What you end up with is pages that render in well under a second on a mid-range phone, an origin that shrugs off a traffic spike because the edge soaks it up, and a bill that barely moves as you grow. There is no trick to it. The discipline is just to make yourself justify every dynamic endpoint instead of assuming one, and most of the time you will find you did not need it.</p>
+  </div>
+
+  <div class="glass art-cta"><h3>Re-platforming a slow, server-heavy site?</h3><p>HOUSE603 designs and migrates static-first architectures with edge caching and hardened headers, so your site gets faster and cheaper at once. It is part of our Custom Engineering and Digital Transformation work.</p><a class="btn btn-primary" href="/services.html">Talk about your architecture &rarr;</a></div>
+
+  <div class="adslot" aria-hidden="true"><span class="ad-label">Advertisement</span><ins class="adsbygoogle" style="display:block" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+
+  <div class="related"><div class="r-label">Keep reading</div><div class="rcards">
+    <a class="glass rcard" href="/technuggets/cloud-right-sizing/"><span class="rc-cat">Cloud Infrastructure</span><h4>Right-Sizing Cloud Compute: Cut 30 to 50% Off Your Bill Without Downtime</h4></a>
+    <a class="glass rcard" href="/technuggets/zero-downtime-deployment/"><span class="rc-cat">Systems Management</span><h4>The Zero-Downtime Deployment Checklist for Small Teams</h4></a>
+  </div></div>
+</article></div></main>
+
+<footer><div class="foot-top"><img src="/logo.png" alt="HOUSE603"><div class="socials"><a href="https://www.facebook.com/house603" target="_blank" rel="noopener" aria-label="HOUSE603 on Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M15 3h-2.6C10.5 3 9.4 4.4 9.4 6.4V9H7.2v3h2.2v9h3.1v-9h2.3l.4-3h-2.7V6.8c0-.6.3-.9 1-.9H15V3z"/></svg></a></div></div><div class="foot-nav"><a href="/">Home</a><a href="/about.html">About</a><a href="/services.html">Services</a><a href="/articles/">Articles</a><a href="/contact.html">Contact</a><a href="/privacy/">Privacy</a></div><div class="foot-tag">Project Management &middot; Digital Transformation &middot; Information Security</div><div class="foot-bot"><span>&copy; <span id="yr"></span> HOUSE603 Ventures &middot; CAC 6878220</span><span><a href="https://house603.com">house603.com</a> &middot; <a href="mailto:info@house603.com">info@house603.com</a></span></div></footer>
+
+<div class="modal" id="ctaModal"><div class="glass modal-card"><button class="modal-close" id="modalClose" aria-label="Close">&times;</button><h3>Let's begin</h3><p>How would you like to reach us?</p><a class="btn btn-primary" href="/contact.html">Send a message</a><a class="btn btn-wa" href="https://wa.me/2348090259050?text=Hello%20HOUSE603%2C%20I%20would%20like%20to%20talk%20about%20a%20project." target="_blank" rel="noopener">Chat on WhatsApp</a></div></div>
+
+<div class="consent" id="consent" role="dialog" aria-label="Cookie consent"><div class="glass consent-card"><p>We use cookies to run Google AdSense advertising, which keeps our articles free. With your consent, ads may be personalised. You can withdraw consent anytime via the <a href="/privacy/" style="color:var(--cream)">Privacy page</a>.</p><div class="consent-row"><button class="btn btn-primary" id="c-accept">Accept all</button><button class="btn" id="c-ess">Non-personalised only</button><button class="btn" id="c-rej">Reject</button></div></div></div>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Static-First Web Architecture: Ship Fast Sites That Survive Traffic Spikes","description":"How to pre-render, cache at the edge, and isolate the few endpoints that truly need a server.","image":"https://house603.com/og-image.png","datePublished":"2026-08-26","dateModified":"2026-09-16","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https://house603.com/technuggets/static-first-architecture/"},"author":{"@type":"Person","name":"Omobolade Odeniyi","jobTitle":"Lead Contributor","hasCredential":["ISO/IEC 27001","ISO/IEC 27701"]},"publisher":{"@type":"Organization","name":"HOUSE603 Ventures","logo":{"@type":"ImageObject","url":"https://house603.com/apple-touch-icon.png"}}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://house603.com/"},{"@type":"ListItem","position":2,"name":"Articles","item":"https://house603.com/articles/"},{"@type":"ListItem","position":3,"name":"Static-First Web Architecture","item":"https://house603.com/technuggets/static-first-architecture/"}]}</script>
+
+<script src="/article-page.js?v=1"></script>
+</body></html>

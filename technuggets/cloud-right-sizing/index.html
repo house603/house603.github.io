@@ -1,0 +1,100 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0b0a09"><meta name="google-adsense-account" content="ca-pub-9118555801196013"><meta name="description" content="A metrics-driven method to right-size cloud instances and cut 30 to 50 percent off compute spend without downtime, with AWS CLI, Terraform, and scheduling examples from the HOUSE603 team."><title>Right-Sizing Cloud Compute: Cut 30 to 50% Off Your Bill Without Downtime | HOUSE603</title><link rel="canonical" href="https://house603.com/technuggets/cloud-right-sizing/"><meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"><meta name="author" content="Omobolade Odeniyi, HOUSE603 Ventures"><meta name="keywords" content="cloud cost optimization, right-sizing, AWS, Azure, GCP, autoscaling, savings plans, reserved instances, CloudWatch, Terraform"><link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><meta property="og:type" content="article"><meta property="og:url" content="https://house603.com/technuggets/cloud-right-sizing/"><meta property="og:title" content="Right-Sizing Cloud Compute: Cut 30 to 50% Off Your Bill Without Downtime"><meta property="og:description" content="A metrics-driven method to right-size cloud instances and cut compute spend without downtime."><meta property="og:image" content="https://house603.com/og-image.png"><meta property="og:site_name" content="HOUSE603"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Right-Sizing Cloud Compute: Cut 30 to 50% Off Your Bill"><meta name="twitter:image" content="https://house603.com/og-image.png"><link rel="stylesheet" href="/styles.css?v=79376db0"><link rel="stylesheet" href="/article.css?v=1"></head><body>
+<div id="prog" class="prog"></div><div class="bg"></div><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="grain"></div>
+<nav class="bar" id="nav"><a href="/" aria-label="HOUSE603 home"><img class="logo" src="/logo.png" alt="HOUSE603"></a><ul id="menu"><li><a href="/">Home</a></li><li><a href="/about.html">About</a></li><li><a href="/services.html">Services</a></li><li><a href="/articles/" class="active">Articles</a></li><li><a href="/contact.html">Contact</a></li><li><a href="#" class="navcta" data-cta>Work with us</a></li></ul><button class="burger" id="burger" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button></nav>
+
+<main class="article-main"><div class="wrap"><article class="article">
+  <nav class="crumb" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep">/</span><a href="/articles/">Articles</a><span class="sep">/</span><span class="here">Cloud Infrastructure</span></nav>
+  <span class="kicker">Cloud Infrastructure</span>
+  <h1>Right-Sizing Cloud Compute: Cut 30 to 50 Percent Off Your Bill Without Downtime</h1>
+  <div class="byline"><span class="avatar">OO</span><span class="who"><b>Omobolade Odeniyi</b><span>Lead Contributor, HOUSE603 &middot; ISO/IEC 27001, 27701</span></span></div>
+  <div class="meta-line">Published 12 Aug 2026 &middot; Updated 16 Sep 2026 &middot; 8 min read</div>
+
+  <aside class="quick-answer"><div class="qa-label">Quick answer</div><p>A big chunk of almost every cloud bill is slack. Instances get picked for a peak that rarely shows up, nobody circles back, and you keep paying for CPU and memory that sit idle. Right-sizing is the unglamorous fix: measure what a workload actually uses over a few real weeks, then move it onto a machine that fits. It carries almost no risk, users never feel it, and it usually frees more money than any clever re-architecture would.</p></aside>
+
+  <div class="article-body">
+    <p>Ask a finance team where the cloud money goes and you usually get a shrug. Compute is nearly always the biggest line on the invoice, and the biggest waste inside it is rarely anything exotic. It is ordinary virtual machines running two or three sizes larger than the work needs. What follows is the sequence we run on a HOUSE603 cost review, in order, with the commands we actually type. None of it is clever. That is the point.</p>
+
+    <h2>Why over-provisioning is the default</h2>
+    <p>It starts innocently. A service ships, nobody knows how much traffic it will take, so someone picks a comfortable size. Traffic grows. There is a scare one afternoon and an engineer bumps the instance to be safe. The size never comes back down. Do that across thirty services over a couple of years and you get a bill that tracks the team's anxiety rather than its traffic.</p>
+    <p>The reason it persists is that shrinking an instance feels risky and saving money is nobody's on-call page at 2 a.m., so the numbers only ever go up. Breaking that pattern does not take heroics. It takes two or three weeks of honest measurement and the nerve to act on what the graphs say instead of what the last incident felt like.</p>
+
+    <div class="adslot adslot--rect" aria-hidden="true"><span class="ad-label">Advertisement</span><ins class="adsbygoogle" style="display:block" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+
+    <h2>Step 1: Baseline with real metrics</h2>
+    <p>Collect two to four weeks so you catch the weekly rhythm, month-end batch jobs and all. Average CPU will lie to you here, so pull the 95th percentile alongside it. A box that averages six percent but hits seventy every Monday morning is not the same box that sits flat at six all week, and only the p95 tells them apart. On AWS the CLI gives you both in one call:</p>
+    <pre><code># p95 CPU for one instance over 14 days (3600s periods)
+aws cloudwatch get-metric-statistics \
+  --namespace AWS/EC2 --metric-name CPUUtilization \
+  --dimensions Name=InstanceId,Value=i-0abc123def456 \
+  --start-time "$(date -u -d '14 days ago' +%FT%TZ)" \
+  --end-time "$(date -u +%FT%TZ)" \
+  --period 3600 --statistics Average --extended-statistics p95 \
+  --query 'Datapoints[].{t:Timestamp,avg:Average,p95:ExtendedStatistics.p95}' \
+  --output table</code></pre>
+    <p>Azure gives you the same shape of data with <code>az monitor metrics list</code>, and GCP with the Monitoring API or <code>gcloud monitoring</code>. Wherever you look, the tell is identical. If p95 CPU sits under roughly ten percent for weeks with plenty of room above it, that instance is a candidate to shrink. Note the word candidate. You are not done, because CPU is only one dimension.</p>
+
+    <h2>Step 2: Memory and I/O matter as much as CPU</h2>
+    <p>This is where a quick win turns into an outage if you rush. A machine can idle on CPU while pinning memory or maxing out disk throughput, and CPU-only right-sizing walks straight into that. AWS makes the trap easy to fall into because the default EC2 metrics do not report memory at all; you have to install the CloudWatch agent to see it. Before you touch anything, confirm memory, network, and EBS throughput on every candidate. A memory-bound service quietly moved onto a CPU-optimized family is exactly how a tidy Friday saving becomes a Sunday-night page.</p>
+
+    <h2>Step 3: Pick the right family, then the right size</h2>
+    <ul>
+      <li><strong>Spiky, mostly idle</strong> workloads suit burstable families (AWS T-series, Azure B-series) that bank credits during quiet periods.</li>
+      <li><strong>Steady, CPU-heavy</strong> services want compute-optimized families (C-series).</li>
+      <li><strong>Memory-heavy</strong> caches and databases want memory-optimized families (R-series).</li>
+    </ul>
+    <p>Get the family right first, then step the size down one notch at a time and watch a full day before the next drop. Resist making one big move to feel efficient; small steps are what keep this boring. And where the workload allows it, prefer two smaller instances behind a load balancer over a single large one. It usually costs a little less, and it turns losing a node into a shrug rather than an outage.</p>
+
+    <h2>Step 4: Prove it in staging, then apply with code</h2>
+    <p>Do not resize by clicking around the console. A console change is invisible to the rest of the team, unreviewed, and awkward to undo. Put the size in infrastructure-as-code instead, so it gets a pull request, a second pair of eyes, and a one-line road back if the graphs turn ugly:</p>
+    <pre><code># variables.tf
+variable "web_instance_type" {
+  type        = string
+  default     = "t3.small"   # was m5.large
+  description = "Right-sized after 4 weeks of p95 &lt; 8%"
+}
+
+# main.tf
+resource "aws_instance" "web" {
+  ami           = var.ami_id
+  instance_type = var.web_instance_type
+  tags = { Name = "web", RightSized = "2026-09" }
+}</code></pre>
+    <p>Push it through staging with a load test that looks like real traffic, watch the same metrics for a day, then promote during working hours when someone is actually looking at the dashboards. Because the size is a variable, backing out is one line and a re-apply, not an emergency.</p>
+
+    <h2>Step 5: Automate the savings so they stay</h2>
+    <p>Here is the part almost everyone skips. Right-sizing decays. Six months on, someone has quietly bumped three instances back up after a busy week and you are paying for slack again. Two habits keep it honest. Autoscale the tier that genuinely varies, so capacity follows demand instead of a human's nerves. And switch non-production off out of hours. Dev and staging that sleep at night and on weekends run for roughly a third of the hours of an always-on setup, which is close to a two-thirds cut on those environments for one line of cron:</p>
+    <pre><code># stop dev fleet weeknights at 20:00 (cron on a control host)
+0 20 * * 1-5  aws ec2 stop-instances --instance-ids \
+  $(aws ec2 describe-instances \
+     --filters "Name=tag:Env,Values=dev" "Name=instance-state-name,Values=running" \
+     --query "Reservations[].Instances[].InstanceId" --output text)</code></pre>
+
+    <h2>Step 6: Lock in a discount on what is left</h2>
+    <p>Discounts come last, and this is the mistake we see most often. A team buys three years of Reserved Instances against their current footprint, feels clever, and locks in every oversized box for the length of the contract. Right-size first. Once the running footprint is honest, cover the steady baseline with Savings Plans or Reserved Instances on AWS, Reservations on Azure, or Committed Use Discounts on GCP, and leave the spiky top of the curve on-demand or on spot. Buy commitment against reality, never against waste.</p>
+
+    <h3>A realistic result</h3>
+    <p>On the mixed fleets we assess, the monthly bill usually comes down somewhere between a third and a bit under a half. Roughly half of that is resizing and switching off idle non-production, and the rest is a sensible commitment on the baseline. None of it is anything a user can feel. Your numbers will not match ours, and that is the point: measure your own before and after, on your own account, and trust that over any headline percentage, including this one.</p>
+  </div>
+
+  <div class="glass art-cta"><h3>Want the exact number for your account, and a plan to hit it?</h3><p>HOUSE603 runs a fixed-scope cloud cost review that turns these steps into a right-sizing plan and the infrastructure-as-code to apply it, without downtime. It is part of our Digital Transformation practice.</p><a class="btn btn-primary" href="/services.html">Book a cloud cost review &rarr;</a></div>
+  <p class="article-body" style="font-size:14.5px;color:var(--soft)">Try it yourself: the <a href="/articles/#tools">Infrastructure Cost Estimator</a> models your monthly spend and shows the right-sizing headroom described above.</p>
+
+  <div class="adslot" aria-hidden="true"><span class="ad-label">Advertisement</span><ins class="adsbygoogle" style="display:block" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+
+  <div class="related"><div class="r-label">Keep reading</div><div class="rcards">
+    <a class="glass rcard" href="/technuggets/static-first-architecture/"><span class="rc-cat">Web Architecture</span><h4>Static-First Web Architecture: Ship Fast Sites That Survive Traffic Spikes</h4></a>
+    <a class="glass rcard" href="/technuggets/zero-downtime-deployment/"><span class="rc-cat">Systems Management</span><h4>The Zero-Downtime Deployment Checklist for Small Teams</h4></a>
+  </div></div>
+</article></div></main>
+
+<footer><div class="foot-top"><img src="/logo.png" alt="HOUSE603"><div class="socials"><a href="https://www.facebook.com/house603" target="_blank" rel="noopener" aria-label="HOUSE603 on Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M15 3h-2.6C10.5 3 9.4 4.4 9.4 6.4V9H7.2v3h2.2v9h3.1v-9h2.3l.4-3h-2.7V6.8c0-.6.3-.9 1-.9H15V3z"/></svg></a></div></div><div class="foot-nav"><a href="/">Home</a><a href="/about.html">About</a><a href="/services.html">Services</a><a href="/articles/">Articles</a><a href="/contact.html">Contact</a><a href="/privacy/">Privacy</a></div><div class="foot-tag">Project Management &middot; Digital Transformation &middot; Information Security</div><div class="foot-bot"><span>&copy; <span id="yr"></span> HOUSE603 Ventures &middot; CAC 6878220</span><span><a href="https://house603.com">house603.com</a> &middot; <a href="mailto:info@house603.com">info@house603.com</a></span></div></footer>
+
+<div class="modal" id="ctaModal"><div class="glass modal-card"><button class="modal-close" id="modalClose" aria-label="Close">&times;</button><h3>Let's begin</h3><p>How would you like to reach us?</p><a class="btn btn-primary" href="/contact.html">Send a message</a><a class="btn btn-wa" href="https://wa.me/2348090259050?text=Hello%20HOUSE603%2C%20I%20would%20like%20to%20talk%20about%20a%20project." target="_blank" rel="noopener">Chat on WhatsApp</a></div></div>
+
+<div class="consent" id="consent" role="dialog" aria-label="Cookie consent"><div class="glass consent-card"><p>We use cookies to run Google AdSense advertising, which keeps our articles free. With your consent, ads may be personalised. You can withdraw consent anytime via the <a href="/privacy/" style="color:var(--cream)">Privacy page</a>.</p><div class="consent-row"><button class="btn btn-primary" id="c-accept">Accept all</button><button class="btn" id="c-ess">Non-personalised only</button><button class="btn" id="c-rej">Reject</button></div></div></div>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Right-Sizing Cloud Compute: Cut 30 to 50 Percent Off Your Bill Without Downtime","description":"A metrics-driven method to right-size cloud instances and cut 30 to 50 percent off compute spend without downtime.","image":"https://house603.com/og-image.png","datePublished":"2026-08-12","dateModified":"2026-09-16","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https://house603.com/technuggets/cloud-right-sizing/"},"author":{"@type":"Person","name":"Omobolade Odeniyi","jobTitle":"Lead Contributor","hasCredential":["ISO/IEC 27001","ISO/IEC 27701"]},"publisher":{"@type":"Organization","name":"HOUSE603 Ventures","logo":{"@type":"ImageObject","url":"https://house603.com/apple-touch-icon.png"}}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://house603.com/"},{"@type":"ListItem","position":2,"name":"Articles","item":"https://house603.com/articles/"},{"@type":"ListItem","position":3,"name":"Right-Sizing Cloud Compute","item":"https://house603.com/technuggets/cloud-right-sizing/"}]}</script>
+
+<script src="/article-page.js?v=1"></script>
+</body></html>

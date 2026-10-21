@@ -1,0 +1,218 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0b0a09"><meta name="google-adsense-account" content="ca-pub-9118555801196013"><meta name="description" content="HOUSE603 Articles: practical, senior-level engineering field notes on cloud infrastructure, web architecture, and systems management, plus a free infrastructure cost estimator."><title>Articles | HOUSE603</title><link rel="canonical" href="https://house603.com/articles/"><meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"><meta name="author" content="HOUSE603 Ventures"><meta name="keywords" content="cloud cost optimization, right-sizing, static-first architecture, edge caching, zero downtime deployment, infrastructure cost estimator, DevOps, systems management, HOUSE603 articles"><link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><meta property="og:type" content="website"><meta property="og:url" content="https://house603.com/articles/"><meta property="og:title" content="Articles | HOUSE603"><meta property="og:description" content="Practical, senior-level engineering field notes on cloud, web architecture, and systems management, plus a free infrastructure cost estimator."><meta property="og:image" content="https://house603.com/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:site_name" content="HOUSE603"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Articles | HOUSE603"><meta name="twitter:description" content="Practical engineering field notes and a free cost estimator from HOUSE603."><meta name="twitter:image" content="https://house603.com/og-image.png"><link rel="stylesheet" href="/styles.css?v=79376db0"><link rel="stylesheet" href="/article.css?v=3"></head><body>
+<div id="prog" class="prog"></div><div class="bg"></div><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="grain"></div>
+<nav class="bar" id="nav"><a href="/" aria-label="HOUSE603 home"><img class="logo" src="/logo.png" alt="HOUSE603"></a><ul id="menu"><li><a href="/">Home</a></li><li><a href="/about.html">About</a></li><li><a href="/services.html">Services</a></li><li><a href="/articles/" class="active">Articles</a></li><li><a href="/contact.html">Contact</a></li><li><a href="#" class="navcta" data-cta>Work with us</a></li></ul><button class="burger" id="burger" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button></nav>
+
+<section class="page-hero" id="home"><div class="eyebrow reveal">Articles</div><h1 class="reveal d1">Field notes from the <em>studio.</em></h1><p class="sub reveal d2">Practical, senior-level engineering on cloud infrastructure, web architecture, and systems management, written by the people who build and secure production systems at HOUSE603.</p></section>
+
+<section class="article-main" style="padding-top:10px">
+  <div class="wrap">
+    <div class="filterow reveal" role="tablist" aria-label="Filter articles">
+      <button class="filt on" data-filter="all">All</button>
+      <button class="filt" data-filter="cloud">Cloud</button>
+      <button class="filt" data-filter="web">Web</button>
+      <button class="filt" data-filter="systems">Systems</button>
+      <button class="filt" data-filter="privacy">Privacy</button>
+    </div>
+    <div class="post-grid">
+      <a class="glass pcard-link reveal d1" data-cat="privacy" href="/technuggets/vpn-wont-stop-ai-data-collection/">
+        <span class="pc-cat">Data Protection</span>
+        <h3>A VPN Still Matters: Why It Won't Stop AI From Collecting Your Data</h3>
+        <p>A VPN encrypts your network connection and hides your IP, but AI collection happens inside your account and app. Here is how to handle both.</p>
+        <span class="pc-meta">21 Oct 2026 &middot; 7 min read</span>
+        <span class="pc-more">Read <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <a class="glass pcard-link reveal d1" data-cat="privacy" href="/technuggets/apple-watch-always-listening-gdpr/">
+        <span class="pc-cat">Data Protection</span>
+        <h3>The Always-Listening Watch: Apple's Audio Intelligence and GDPR</h3>
+        <p>Apple's newest watches listen all day. Apple says no audio is stored, but under GDPR a transcript of a bystander is still their personal data.</p>
+        <span class="pc-meta">21 Sep 2026 &middot; 6 min read</span>
+        <span class="pc-more">Read <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <a class="glass pcard-link reveal d1" data-cat="cloud" href="/technuggets/cloud-right-sizing/">
+        <span class="pc-cat">Cloud Infrastructure</span>
+        <h3>Right-Sizing Cloud Compute: Cut 30 to 50% Off Your Bill Without Downtime</h3>
+        <p>A metrics-driven method for matching instance type and count to real demand, with AWS CLI, Terraform, and scheduling examples.</p>
+        <span class="pc-meta">12 Aug 2026 &middot; 8 min read</span>
+        <span class="pc-more">Read <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <a class="glass pcard-link reveal d2" data-cat="web" href="/technuggets/static-first-architecture/">
+        <span class="pc-cat">Web Architecture</span>
+        <h3>Static-First Web Architecture: Ship Fast Sites That Survive Traffic Spikes</h3>
+        <p>Pre-render, cache at the edge, and isolate the few endpoints that truly need a server. Cache-control, nginx, and SWR examples.</p>
+        <span class="pc-meta">26 Aug 2026 &middot; 7 min read</span>
+        <span class="pc-more">Read <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <a class="glass pcard-link reveal d3" data-cat="systems" href="/technuggets/zero-downtime-deployment/">
+        <span class="pc-cat">Systems Management</span>
+        <h3>The Zero-Downtime Deployment Checklist for Small Teams</h3>
+        <p>A rehearsable, reversible release process a two-person team can run in daylight. systemd, nginx, and CI examples.</p>
+        <span class="pc-meta">09 Sep 2026 &middot; 9 min read</span>
+        <span class="pc-more">Read <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+    </div>
+
+    <!-- Ad: content-first, below the article list -->
+    <div class="adslot adslot--rect reveal" aria-hidden="true"><span class="ad-label">Advertisement</span><ins class="adsbygoogle" style="display:block" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+  </div>
+</section>
+
+<!-- Free tool: Infrastructure Cost Estimator -->
+<section id="tools"><div class="wrap">
+  <div class="eyebrow reveal">Free tool</div>
+  <h2 class="sec-title reveal d1">Infrastructure Cost <em>Estimator.</em></h2>
+  <p class="sec-sub reveal d1">Model a monthly cloud footprint and see the right-sizing headroom from our cloud article. It runs entirely in your browser and remembers your inputs on this device. Figures are indicative on-demand estimates for planning; confirm exact pricing with your provider.</p>
+  <div class="glass reveal d2" style="padding:clamp(22px,3vw,34px);margin-top:24px">
+    <div class="est-grid">
+      <div>
+        <div class="est-field"><label for="e-preset">Workload preset</label>
+          <select id="e-preset"><option value="custom">Custom</option><option value="starter">Starter web app</option><option value="growth">Growth SaaS</option><option value="dataheavy">Data-heavy platform</option></select></div>
+        <div class="est-two">
+          <div class="est-field"><label for="e-inst">Instances</label><input id="e-inst" type="number" min="0" step="1" value="2"></div>
+          <div class="est-field"><label for="e-vcpu">vCPU each</label><input id="e-vcpu" type="number" min="0" step="1" value="2"></div>
+        </div>
+        <div class="est-two">
+          <div class="est-field"><label for="e-ram">RAM GB each</label><input id="e-ram" type="number" min="0" step="1" value="8"></div>
+          <div class="est-field"><label for="e-hours">Hours / month</label><input id="e-hours" type="number" min="0" step="1" value="730"></div>
+        </div>
+        <div class="est-two">
+          <div class="est-field"><label for="e-store">Block storage GB</label><input id="e-store" type="number" min="0" step="1" value="100"></div>
+          <div class="est-field"><label for="e-egress">Egress GB / month</label><input id="e-egress" type="number" min="0" step="1" value="200"></div>
+        </div>
+        <div class="est-field"><label for="e-region">Region</label>
+          <select id="e-region"><option value="1">North America</option><option value="1.08">Europe (+8%)</option><option value="1.15">Asia Pacific (+15%)</option><option value="1.20">South America / Africa (+20%)</option></select></div>
+        <div class="est-field"><label style="display:flex;align-items:center;gap:9px;text-transform:none;letter-spacing:0;font-family:var(--sans);font-size:14px;color:var(--cream)"><input id="e-db" type="checkbox" style="width:auto"> Add a managed database</label></div>
+      </div>
+      <div class="glass est-out">
+        <div class="eo-lab">Estimated monthly</div>
+        <div class="eo-big" id="o-month">$0</div>
+        <div class="eo-row"><span class="eo-lab">Annual (on-demand)</span><b id="o-year">$0</b></div>
+        <div class="eo-row"><span class="eo-lab">Right-sizing headroom</span><b id="o-save">$0 / mo</b></div>
+        <p class="est-note" id="o-break">Enter a workload to see the breakdown.</p>
+        <a class="btn btn-primary" href="/services.html" style="margin-top:18px">Get the exact figure &rarr;</a>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- Editorial standards / E-E-A-T -->
+<section id="standards"><div class="wrap">
+  <div class="eyebrow reveal">Editorial standards</div>
+  <h2 class="sec-title reveal d1">Written by the people who <em>ship it.</em></h2>
+  <div class="about-wrap" style="margin-top:22px">
+    <div>
+      <p class="about-body reveal d1" style="font-size:16px">Every article is written by a practising engineer, not a content mill. We publish only techniques we have used on real systems, we show the actual commands and configuration, and we date every piece with a clear last-updated stamp. When something changes in the field, we revise the article rather than leave it stale.</p>
+      <p class="about-body reveal d1">Articles are authored and reviewed by HOUSE603 engineers who hold industry credentials including ISO/IEC 27001 and ISO/IEC 27701. Advertising via Google AdSense keeps these resources free; if you would rather we implement the work, our services are one click away.</p>
+      <a class="btn" href="/about.html" style="margin-top:18px">More about HOUSE603 &rarr;</a>
+    </div>
+    <div class="glass stats reveal d2">
+      <div class="stat"><b>ISO/IEC 27001</b><span>Information security</span></div>
+      <div class="stat"><b>ISO/IEC 27701</b><span>Privacy information management</span></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- CTA strip -->
+<section><div class="wrap"><div class="glass strip reveal d2"><div class="st-txt"><b>From reading to shipping</b><p>These articles are the summary. HOUSE603 does the build: digital transformation, project delivery, and information security including vCISO and readiness for SOC 2, ISO 27001, ISO 42001, and ISO/IEC 27701:2025.</p></div><a class="btn btn-primary" href="/services.html">See services</a></div></div></section>
+
+<footer><div class="foot-top"><img src="/logo.png" alt="HOUSE603"><div class="socials"><a href="https://www.facebook.com/house603" target="_blank" rel="noopener" aria-label="HOUSE603 on Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M15 3h-2.6C10.5 3 9.4 4.4 9.4 6.4V9H7.2v3h2.2v9h3.1v-9h2.3l.4-3h-2.7V6.8c0-.6.3-.9 1-.9H15V3z"/></svg></a></div></div><div class="foot-nav"><a href="/">Home</a><a href="/about.html">About</a><a href="/services.html">Services</a><a href="/articles/">Articles</a><a href="/contact.html">Contact</a><a href="/privacy/">Privacy</a></div><div class="foot-tag">Project Management &middot; Digital Transformation &middot; Information Security</div><div class="foot-bot"><span>&copy; <span id="yr"></span> HOUSE603 Ventures &middot; CAC 6878220</span><span><a href="https://house603.com">house603.com</a> &middot; <a href="mailto:info@house603.com">info@house603.com</a></span></div></footer>
+
+<div class="modal" id="ctaModal"><div class="glass modal-card"><button class="modal-close" id="modalClose" aria-label="Close">&times;</button><h3>Let's begin</h3><p>How would you like to reach us?</p><a class="btn btn-primary" href="/contact.html">Send a message</a><a class="btn btn-wa" href="https://wa.me/2348090259050?text=Hello%20HOUSE603%2C%20I%20would%20like%20to%20talk%20about%20a%20project." target="_blank" rel="noopener">Chat on WhatsApp</a></div></div>
+
+<div class="consent" id="consent" role="dialog" aria-label="Cookie consent"><div class="glass consent-card"><p>We use cookies to run Google AdSense advertising, which keeps our articles free. With your consent, ads may be personalised. You can withdraw consent anytime via the Privacy page.</p><div class="consent-row"><button class="btn btn-primary" id="c-accept">Accept all</button><button class="btn" id="c-ess">Non-personalised only</button><button class="btn" id="c-rej">Reject</button></div></div></div>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[
+{"@type":"Organization","@id":"https://house603.com/#org","name":"HOUSE603 Ventures","alternateName":"HOUSE603","url":"https://house603.com/","logo":"https://house603.com/apple-touch-icon.png","email":"info@house603.com","sameAs":["https://www.facebook.com/house603"]},
+{"@type":"WebSite","@id":"https://house603.com/#website","name":"HOUSE603","url":"https://house603.com/","publisher":{"@id":"https://house603.com/#org"},"inLanguage":"en"},
+{"@type":"Person","@id":"https://house603.com/#omobolade","name":"Omobolade Odeniyi","jobTitle":"Lead Contributor","worksFor":{"@id":"https://house603.com/#org"},"hasCredential":["ISO/IEC 27001","ISO/IEC 27701"]},
+{"@type":"Blog","@id":"https://house603.com/articles/#blog","name":"HOUSE603 Articles","url":"https://house603.com/articles/","description":"Practical, senior-level engineering field notes on cloud infrastructure, web architecture, and systems management.","publisher":{"@id":"https://house603.com/#org"},"inLanguage":"en","blogPost":[
+{"@type":"BlogPosting","headline":"A VPN Still Matters: Why It Won't Stop AI From Collecting Your Data","url":"https://house603.com/technuggets/vpn-wont-stop-ai-data-collection/","datePublished":"2026-10-21","author":{"@id":"https://house603.com/#omobolade"}},
+{"@type":"BlogPosting","headline":"The Always-Listening Watch: What Apple's Audio Intelligence Means Under GDPR","url":"https://house603.com/technuggets/apple-watch-always-listening-gdpr/","datePublished":"2026-09-21","author":{"@id":"https://house603.com/#omobolade"}},
+{"@type":"BlogPosting","headline":"Right-Sizing Cloud Compute: Cut 30 to 50% Off Your Bill Without Downtime","url":"https://house603.com/technuggets/cloud-right-sizing/","datePublished":"2026-08-12","author":{"@id":"https://house603.com/#omobolade"}},
+{"@type":"BlogPosting","headline":"Static-First Web Architecture: Ship Fast Sites That Survive Traffic Spikes","url":"https://house603.com/technuggets/static-first-architecture/","datePublished":"2026-08-26","author":{"@id":"https://house603.com/#omobolade"}},
+{"@type":"BlogPosting","headline":"The Zero-Downtime Deployment Checklist for Small Teams","url":"https://house603.com/technuggets/zero-downtime-deployment/","datePublished":"2026-09-09","author":{"@id":"https://house603.com/#omobolade"}}]},
+{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://house603.com/"},{"@type":"ListItem","position":2,"name":"Articles","item":"https://house603.com/articles/"}]}]}</script>
+
+<script>
+(function(){
+  "use strict";
+  var y=document.getElementById('yr'); if(y) y.textContent=new Date().getFullYear();
+  var nav=document.getElementById('nav');
+  if(nav){var s=function(){nav.classList.toggle('scrolled',window.scrollY>40);};s();addEventListener('scroll',s,{passive:true});}
+  var menu=document.getElementById('menu'),burger=document.getElementById('burger');
+  if(burger&&menu){burger.addEventListener('click',function(){menu.classList.toggle('open');});menu.addEventListener('click',function(e){if(e.target.tagName==='A')menu.classList.remove('open');});}
+  var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}});},{threshold:.14,rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+  var prog=document.getElementById('prog');
+  if(prog){var sp=function(){var d=document.documentElement,mx=(d.scrollHeight-d.clientHeight)||1;prog.style.transform='scaleX('+(d.scrollTop/mx)+')';};sp();addEventListener('scroll',sp,{passive:true});}
+  var fine=matchMedia('(hover:hover) and (pointer:fine)').matches,rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if(fine&&!rm){document.querySelectorAll('.glass').forEach(function(el){el.addEventListener('pointermove',function(e){var r=el.getBoundingClientRect();el.style.setProperty('--mx',(e.clientX-r.left)+'px');el.style.setProperty('--my',(e.clientY-r.top)+'px');});});}
+  var modal=document.getElementById('ctaModal');
+  if(modal){var openM=function(e){if(e)e.preventDefault();modal.classList.add('open');};var closeM=function(){modal.classList.remove('open');};
+    document.querySelectorAll('[data-cta]').forEach(function(b){b.addEventListener('click',openM);});
+    var mc=document.getElementById('modalClose');if(mc)mc.addEventListener('click',closeM);
+    modal.addEventListener('click',function(e){if(e.target===modal)closeM();});}
+
+  /* ---- Category filter ---- */
+  var filts=document.querySelectorAll('.filt'),cards=document.querySelectorAll('.pcard-link');
+  filts.forEach(function(b){b.addEventListener('click',function(){
+    filts.forEach(function(x){x.classList.remove('on');});b.classList.add('on');
+    var f=b.getAttribute('data-filter');
+    cards.forEach(function(c){c.style.display=(f==='all'||c.getAttribute('data-cat')===f)?'':'none';});
+  });});
+
+  /* ---- Store helper ---- */
+  var Store={get:function(k,d){try{var v=localStorage.getItem('h6_'+k);return v===null?d:JSON.parse(v);}catch(e){return d;}},
+    set:function(k,v){try{localStorage.setItem('h6_'+k,JSON.stringify(v));}catch(e){}}};
+
+  /* ---- Cost estimator ---- */
+  var RATES={vcpuHour:0.031,ramGbHour:0.0041,storageGbMonth:0.10,egressGb:0.085,dbFlat:65,dbPerGb:3.2};
+  var PRESETS={starter:{inst:1,vcpu:2,ram:4,hours:730,store:50,egress:100,db:false},
+    growth:{inst:3,vcpu:4,ram:8,hours:730,store:200,egress:500,db:true},
+    dataheavy:{inst:6,vcpu:8,ram:32,hours:730,store:2000,egress:2000,db:true}};
+  var F={inst:'e-inst',vcpu:'e-vcpu',ram:'e-ram',hours:'e-hours',store:'e-store',egress:'e-egress'};
+  function el(id){return document.getElementById(id);}
+  function money(n){return '$'+Math.round(n).toLocaleString('en-US');}
+  function compute(){
+    var g=function(id){return parseFloat(el(id).value)||0;};
+    var inst=g('e-inst'),vcpu=g('e-vcpu'),ram=g('e-ram'),hours=g('e-hours'),store=g('e-store'),egress=g('e-egress');
+    var region=parseFloat(el('e-region').value)||1,db=el('e-db').checked;
+    var comp=inst*(vcpu*RATES.vcpuHour+ram*RATES.ramGbHour)*hours*region;
+    var sc=store*RATES.storageGbMonth, ec=egress*RATES.egressGb, dc=db?(RATES.dbFlat+RATES.dbPerGb*ram):0;
+    var monthly=comp+sc+ec+dc, save=comp*0.4;
+    el('o-month').textContent=money(monthly);
+    el('o-year').textContent=money(monthly*12);
+    el('o-save').textContent=money(save)+' / mo';
+    el('o-break').textContent='Compute '+money(comp)+' · Storage '+money(sc)+' · Egress '+money(ec)+(db?' · Database '+money(dc):'')+'. Right-sizing could return about '+money(save)+' per month. Indicative estimate only.';
+    saveState();
+  }
+  function saveState(){var st={};Object.keys(F).forEach(function(k){st[k]=el(F[k]).value;});st.region=el('e-region').value;st.db=el('e-db').checked;st.preset=el('e-preset').value;Store.set('est',st);}
+  function applyPreset(name){var p=PRESETS[name];if(!p)return;el('e-inst').value=p.inst;el('e-vcpu').value=p.vcpu;el('e-ram').value=p.ram;el('e-hours').value=p.hours;el('e-store').value=p.store;el('e-egress').value=p.egress;el('e-db').checked=p.db;}
+  if(el('o-month')){
+    var saved=Store.get('est',null);
+    if(saved){Object.keys(F).forEach(function(k){if(saved[k]!=null)el(F[k]).value=saved[k];});if(saved.region)el('e-region').value=saved.region;el('e-db').checked=!!saved.db;if(saved.preset)el('e-preset').value=saved.preset;}
+    el('e-preset').addEventListener('change',function(){if(this.value!=='custom'){applyPreset(this.value);}compute();});
+    ['e-inst','e-vcpu','e-ram','e-hours','e-store','e-egress','e-region','e-db'].forEach(function(id){el(id).addEventListener('input',function(){el('e-preset').value='custom';compute();});});
+    compute();
+  }
+
+  /* ---- Consent + AdSense (config-gated) ---- */
+  var CONFIG={adsenseClient:'ca-pub-9118555801196013'};
+  var consent=document.getElementById('consent'), adsLoaded=false;
+  function loadAds(mode){
+    if(adsLoaded||!CONFIG.adsenseClient)return;adsLoaded=true;
+    if(mode==='essential'){window.adsbygoogle=window.adsbygoogle||[];window.adsbygoogle.requestNonPersonalizedAds=1;}
+    var s=document.createElement('script');s.async=true;s.crossOrigin='anonymous';
+    s.src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client='+encodeURIComponent(CONFIG.adsenseClient);
+    s.onload=function(){document.querySelectorAll('ins.adsbygoogle').forEach(function(ins){ins.setAttribute('data-ad-client',CONFIG.adsenseClient);try{(window.adsbygoogle=window.adsbygoogle||[]).push({});}catch(e){}});};
+    document.head.appendChild(s);
+  }
+  function setConsent(v){Store.set('consent',v);if(consent)consent.classList.remove('show');if(v==='all')loadAds('all');else if(v==='essential')loadAds('essential');}
+  var c=Store.get('consent',null);
+  if(c==='all')loadAds('all'); else if(c==='essential')loadAds('essential'); else if(consent)consent.classList.add('show');
+  var ca=document.getElementById('c-accept'),ce=document.getElementById('c-ess'),cr=document.getElementById('c-rej');
+  if(ca)ca.addEventListener('click',function(){setConsent('all');});
+  if(ce)ce.addEventListener('click',function(){setConsent('essential');});
+  if(cr)cr.addEventListener('click',function(){setConsent('reject');});
+})();
+</script>
+</body></html>

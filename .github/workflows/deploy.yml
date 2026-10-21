@@ -1,0 +1,45 @@
+name: Deploy to Hostinger
+
+# Deploys the site to Hostinger over FTP on every push to main.
+# Set three repository secrets first (Settings -> Secrets and variables -> Actions -> New repository secret):
+#   FTP_SERVER    e.g. ftp.house603.com  (from hPanel -> Files -> FTP Accounts -> "FTP host")
+#   FTP_USERNAME  your FTP account username
+#   FTP_PASSWORD  your FTP account password
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:      # lets you run it manually from the Actions tab
+
+concurrency:
+  group: deploy-hostinger
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps          # explicit FTPS on port 21; change to "ftp" if your host rejects TLS
+          port: 21
+          # Where the site should live on the server. Most Hostinger FTP accounts land in the
+          # account home, so the web root is public_html/. If your FTP account is already scoped
+          # to public_html, change this to "./".
+          server-dir: ./public_html/
+          local-dir: ./
+          # Never upload repo plumbing:
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.github/**
+            **/README.md
+            **/.gitignore
+            **/.nojekyll

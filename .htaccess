@@ -1,0 +1,25 @@
+# HOUSE603 static site
+Options -Indexes
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  Header set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+</IfModule>
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml application/xml
+</IfModule>
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/x-icon "access plus 1 year"
+  ExpiresByType text/html "access plus 1 hour"
+</IfModule>
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^technuggets/?$ /articles/ [R=301,L]
+  RewriteRule ^technuggets/about/?$ /articles/ [R=301,L]
+  RewriteRule ^technuggets/privacy/?$ /privacy/ [R=301,L]
+  RewriteRule ^technuggets/contact/?$ /contact.html [R=301,L]
+</IfModule>
