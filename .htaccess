@@ -1,15 +1,20 @@
 # HOUSE603 static site
 DirectoryIndex index.html index.php default.php
 Options -Indexes
+
 <IfModule mod_headers.c>
   Header set X-Content-Type-Options "nosniff"
   Header set X-Frame-Options "SAMEORIGIN"
   Header set Referrer-Policy "strict-origin-when-cross-origin"
   Header set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+  Header always set Content-Security-Policy "upgrade-insecure-requests"
 </IfModule>
+
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml application/xml
 </IfModule>
+
 <IfModule mod_expires.c>
   ExpiresActive On
   ExpiresByType text/css "access plus 1 month"
@@ -17,8 +22,18 @@ Options -Indexes
   ExpiresByType image/x-icon "access plus 1 year"
   ExpiresByType text/html "access plus 1 hour"
 </IfModule>
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
+
+  # Force HTTPS on all requests
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # Canonical www to apex redirect
+  RewriteCond %{HTTP_HOST} ^www\.house603\.com$ [NC]
+  RewriteRule ^(.*)$ https://house603.com/$1 [L,R=301]
+
   RewriteCond %{HTTP_HOST} ^(www\.)?house603\.com$ [NC]
   RewriteRule ^projects(/.*)?$ https://projects.house603.com/ [R=301,L]
   RewriteRule ^technuggets/?$ /articles/ [R=301,L]
