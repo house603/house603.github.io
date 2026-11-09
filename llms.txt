@@ -21,5 +21,6 @@ The security practice is led by certified practitioners (CISSP, CISM, ISO 27001/
 ## Pages
 - Home: https://house603.com/
 - Services: https://house603.com/services.html
+- Projects (Selected Works): https://projects.house603.com/
 - About: https://house603.com/about.html
 - Contact: https://house603.com/contact.html
