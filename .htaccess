@@ -19,6 +19,8 @@ Options -Indexes
 </IfModule>
 <IfModule mod_rewrite.c>
   RewriteEngine On
+  RewriteCond %{HTTP_HOST} ^(www\.)?house603\.com$ [NC]
+  RewriteRule ^projects(/.*)?$ https://projects.house603.com/ [R=301,L]
   RewriteRule ^technuggets/?$ /articles/ [R=301,L]
   RewriteRule ^technuggets/about/?$ /articles/ [R=301,L]
   RewriteRule ^technuggets/privacy/?$ /privacy/ [R=301,L]

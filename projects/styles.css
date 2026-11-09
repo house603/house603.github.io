@@ -260,3 +260,14 @@ footer{border-top:1px solid var(--stroke);padding:48px clamp(22px,6vw,72px) 44px
   .stats-banner .s-item{border-right:none;padding-right:0}
   .filter-wrap{justify-content:flex-start}
 }
+
+/* Standalone Domain Navigation & Footer */
+.brand-group{display:inline-flex;align-items:center;gap:11px}
+.brand-link{display:inline-flex;align-items:center;gap:11px;text-decoration:none}
+.nav-badge{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ember);padding:4px 9px;border-radius:20px;background:rgba(238,110,30,.12);border:1px solid rgba(238,110,30,.32);white-space:nowrap}
+.nav-return{display:inline-flex;align-items:center;gap:6px;color:var(--cream)!important;background:var(--glass2)!important;border:1px solid var(--stroke2);padding:7px 13px!important;border-radius:30px;transition:.25s ease}
+.nav-return:hover{border-color:var(--ember);color:var(--ember)!important;transform:translateY(-1px)}
+.foot-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.foot-main-link{font-family:var(--sans);font-size:13px;font-weight:600;color:var(--cream);padding:8px 16px;border-radius:24px;background:var(--glass2);border:1px solid var(--stroke2);text-decoration:none;transition:.25s ease}
+.foot-main-link:hover{border-color:var(--ember);color:var(--ember);transform:translateY(-1px)}
+
