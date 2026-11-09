@@ -1,4 +1,5 @@
 # HOUSE603 static site
+DirectoryIndex index.html index.php default.php
 Options -Indexes
 <IfModule mod_headers.c>
   Header set X-Content-Type-Options "nosniff"
