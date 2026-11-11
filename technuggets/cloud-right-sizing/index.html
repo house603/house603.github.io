@@ -9,6 +9,8 @@
   <div class="byline"><span class="avatar">OO</span><span class="who"><b>Omobolade Odeniyi</b><span>Lead Contributor, HOUSE603 &middot; ISO/IEC 27001, 27701</span></span></div>
   <div class="meta-line">Published 12 Aug 2026 &middot; Updated 16 Sep 2026 &middot; 8 min read</div>
 
+  <div class="aff-disclosure" role="note" aria-label="Affiliate disclosure"><strong>Disclosure</strong> This article includes partner links for <a href="https://go.nordvpn.net/aff_c?offer_id=15&amp;aff_id=159119&amp;url_id=902" target="_blank" rel="sponsored noopener" style="color:var(--cream)">NordVPN</a> and <a href="https://go.nordpass.io/aff_c?offer_id=488&amp;aff_id=159119&amp;url_id=9356" target="_blank" rel="sponsored noopener" style="color:var(--cream)">NordPass</a>. If you purchase through our links, HOUSE603 may earn a commission at no extra cost to you.</div>
+
   <aside class="quick-answer"><div class="qa-label">Quick answer</div><p>A big chunk of almost every cloud bill is slack. Instances get picked for a peak that rarely shows up, nobody circles back, and you keep paying for CPU and memory that sit idle. Right-sizing is the unglamorous fix: measure what a workload actually uses over a few real weeks, then move it onto a machine that fits. It carries almost no risk, users never feel it, and it usually frees more money than any clever re-architecture would.</p></aside>
 
   <div class="article-body">
@@ -119,6 +121,16 @@ resource "aws_instance" "web" {
 
     <h3>A realistic result</h3>
     <p>On the mixed fleets we assess, the monthly bill usually comes down somewhere between a third and a bit under a half. Roughly half of that is resizing and switching off idle non-production, and the rest is a sensible commitment on the baseline. None of it is anything a user can feel. Your numbers will not match ours, and that is the point: measure your own before and after, on your own account, and trust that over any headline percentage, including this one.</p>
+
+    <div class="partner-banner-wrap reveal" role="region" aria-label="NordVPN partner offer">
+      <span class="ad-label" style="font-family:var(--mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--mute)">Partner recommendation</span>
+      <a class="partner-banner" href="https://go.nordvpn.net/aff_c?offer_id=15&amp;aff_id=159119&amp;url_id=902" target="_blank" rel="sponsored noopener">
+        <picture>
+          <source media="(max-width: 520px)" srcset="../../brand-logos/generic-affiliate-banners-v1-300x250.jpg">
+          <img src="../../brand-logos/generic-affiliate-banners-v1-728x90.jpg" alt="Get NordVPN for secure cloud administration and network encryption" width="728" height="90" loading="lazy">
+        </picture>
+      </a>
+    </div>
   </div>
 
   <div class="glass art-cta"><h3>Want the exact number for your account, and a plan to hit it?</h3><p>HOUSE603 runs a fixed-scope cloud cost review that turns these steps into a right-sizing plan and the infrastructure-as-code to apply it, without downtime. It is part of our Digital Transformation practice.</p><a class="btn btn-primary" href="../../services.html">Book a cloud cost review &rarr;</a></div>

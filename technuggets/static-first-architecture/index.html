@@ -9,6 +9,8 @@
   <div class="byline"><span class="avatar">OO</span><span class="who"><b>Omobolade Odeniyi</b><span>Lead Contributor, HOUSE603 &middot; ISO/IEC 27001, 27701</span></span></div>
   <div class="meta-line">Published 26 Aug 2026 &middot; Updated 16 Sep 2026 &middot; 7 min read</div>
 
+  <div class="aff-disclosure" role="note" aria-label="Affiliate disclosure"><strong>Disclosure</strong> This article includes partner links for <a href="https://go.nordvpn.net/aff_c?offer_id=15&amp;aff_id=159119&amp;url_id=902" target="_blank" rel="sponsored noopener" style="color:var(--cream)">NordVPN</a> and <a href="https://go.nordpass.io/aff_c?offer_id=488&amp;aff_id=159119&amp;url_id=9356" target="_blank" rel="sponsored noopener" style="color:var(--cream)">NordPass</a>. If you purchase through our links, HOUSE603 may earn a commission at no extra cost to you.</div>
+
   <aside class="quick-answer"><div class="qa-label">Quick answer</div><p>Static-first means you render pages to plain HTML at build time, serve them from a CDN edge near the reader, and keep servers only for the handful of endpoints that genuinely have to compute on every request. You get pages that load in well under a second, a site that barely notices a traffic spike, almost nothing for an attacker to poke at, and a hosting bill you round to the nearest dollar. The mindset behind it is simple. Make dynamic behaviour something you justify, not something you reach for by default.</p></aside>
 
   <div class="article-body">
@@ -111,6 +113,16 @@ Cache-Control: public, max-age=0, s-maxage=600, stale-while-revalidate=86400</co
 
     <h3>What you get</h3>
     <p>What you end up with is pages that render in well under a second on a mid-range phone, an origin that shrugs off a traffic spike because the edge soaks it up, and a bill that barely moves as you grow. There is no trick to it. The discipline is just to make yourself justify every dynamic endpoint instead of assuming one, and most of the time you will find you did not need it.</p>
+
+    <div class="partner-banner-wrap reveal" role="region" aria-label="NordVPN partner offer">
+      <span class="ad-label" style="font-family:var(--mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--mute)">Partner recommendation</span>
+      <a class="partner-banner" href="https://go.nordvpn.net/aff_c?offer_id=15&amp;aff_id=159119&amp;url_id=902" target="_blank" rel="sponsored noopener">
+        <picture>
+          <source media="(max-width: 520px)" srcset="../../brand-logos/generic-affiliate-banners-v1-300x250.jpg">
+          <img src="../../brand-logos/generic-affiliate-banners-v1-728x90.jpg" alt="Get NordVPN for secure edge deployment and encrypted network traffic" width="728" height="90" loading="lazy">
+        </picture>
+      </a>
+    </div>
   </div>
 
   <div class="glass art-cta"><h3>Re-platforming a slow, server-heavy site?</h3><p>HOUSE603 designs and migrates static-first architectures with edge caching and hardened headers, so your site gets faster and cheaper at once. It is part of our Custom Engineering and Digital Transformation work.</p><a class="btn btn-primary" href="../../services.html">Talk about your architecture &rarr;</a></div>
