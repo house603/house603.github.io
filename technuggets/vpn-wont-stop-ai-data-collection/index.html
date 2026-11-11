@@ -47,6 +47,46 @@
     <p>HTTPS protects the body of a web request, but the network between your laptop and the rest of the internet still leaks plenty of context. Without a VPN, whoever runs the coffee-shop Wi-Fi, the hotel network, the coworking router, or your home broadband can still see the DNS lookups your machine makes, the Server Name Indication (SNI) headers in TLS handshakes, the IP addresses of the servers you talk to, when and how much data you move, and your real IP address and rough location.</p>
     <p>A well-run VPN closes that gap. Wrapping your traffic in an encrypted WireGuard tunnel, such as <a href="https://go.nordvpn.net/aff_c?offer_id=15&amp;aff_id=159119&amp;url_id=902" target="_blank" rel="sponsored noopener">NordVPN</a> using its NordLynx protocol, and routing DNS queries through that same tunnel means the local network only sees a single stream of encrypted traffic going to one server. That shuts down packet snooping and rogue hotspots on shared Wi-Fi, stops your ISP from logging every domain you visit or throttling specific traffic, and keeps sites where you are not signed in from tying your visits together by your home or roaming IP address.</p>
 
+    <div class="table-wrap">
+      <table class="article-table">
+        <caption>Security Boundary Matrix: Transport vs. Application Layer</caption>
+        <thead>
+          <tr>
+            <th>Security Vector</th>
+            <th>VPN Protection (Transport)</th>
+            <th>AI Platform Capture (Application)</th>
+            <th>Recommended Control</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Local Wi-Fi &amp; ISP Snooping</strong></td>
+            <td>Full WireGuard / TLS encryption; hides destination IPs and DNS queries</td>
+            <td>Out of scope (handled at transport layer)</td>
+            <td>Always run a vetted tunnel like NordVPN on shared or hotel networks</td>
+          </tr>
+          <tr>
+            <td><strong>Chat Prompts &amp; Uploaded Files</strong></td>
+            <td>Unchanged; payload is delivered intact to the provider</td>
+            <td>Logged, stored, and potentially used for future model training</td>
+            <td>Opt out in AI workspace settings; strip PII and internal secrets</td>
+          </tr>
+          <tr>
+            <td><strong>Account Identity &amp; Auth Tokens</strong></td>
+            <td>Protected in transit from packet sniffing</td>
+            <td>Directly tied to user profile, session cookies, and billing data</td>
+            <td>Use isolated logins, passkeys, and masked aliases via NordPass</td>
+          </tr>
+          <tr>
+            <td><strong>Browser Extension Ingestion</strong></td>
+            <td>No protection; extensions read DOM data directly from the active tab</td>
+            <td>Can exfiltrate prompt history regardless of network tunnel status</td>
+            <td>Audit extensions; disable third-party scrapers and unvetted AI toolbars</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
     <h2>Why the tunnel stops at the AI front door</h2>
     <p>Follow what happens one step further along the line. Your request leaves the VPN server, crosses the public internet over HTTPS, and arrives at OpenAI, Anthropic, Google, Microsoft, or one of the hundreds of smaller apps built on their APIs. At that point the VPN has done everything it was built to do, and the AI provider still gets everything you sent.</p>
 
@@ -150,8 +190,8 @@
   <div class="glass art-cta"><h3>Need clear guardrails for AI usage and remote security across your team?</h3><p>HOUSE603 helps growing teams put practical security governance in place, from fractional vCISO leadership and acceptable-use policies to formal readiness for ISO/IEC 27001, ISO/IEC 27701:2025, and ISO/IEC 42001.</p><a class="btn btn-primary" href="../../services.html">See security &amp; ISO 42001 services &rarr;</a></div>
 
   <div class="related"><div class="r-label">Keep reading</div><div class="rcards">
-    <a class="glass rcard" href="../../technuggets/will-ai-take-my-job/"><span class="rc-cat">Workforce &amp; Systems</span><h4>Will AI Take My Job? Why "Someone Who Uses AI Will" Is Only Half the Answer</h4></a>
-    <a class="glass rcard" href="../../technuggets/apple-watch-always-listening-gdpr/"><span class="rc-cat">Data Protection</span><h4>The Always-Listening Watch: What Apple's Audio Intelligence Means Under GDPR</h4></a>
+    <a class="glass rcard" href="../../technuggets/will-ai-take-my-job/index.html"><span class="rc-cat">Workforce &amp; Systems</span><h4>Will AI Take My Job? Why "Someone Who Uses AI Will" Is Only Half the Answer</h4></a>
+    <a class="glass rcard" href="../../technuggets/apple-watch-always-listening-gdpr/index.html"><span class="rc-cat">Data Protection</span><h4>The Always-Listening Watch: What Apple's Audio Intelligence Means Under GDPR</h4></a>
   </div></div>
 
   <p class="article-body" style="font-size:12.5px;color:var(--mute);margin-top:30px">Standards &amp; references: <a href="https://www.iso.org/standard/81230.html" target="_blank" rel="noopener">ISO/IEC 42001 (AI Management Systems)</a>; <a href="https://www.iso.org/standard/71670.html" target="_blank" rel="noopener">ISO/IEC 27701 (Privacy Information Management)</a>; <a href="https://www.rfc-editor.org/rfc/rfc8446" target="_blank" rel="noopener">IETF RFC 8446 (TLS 1.3)</a>.</p>
@@ -163,8 +203,9 @@
 
 <div class="consent" id="consent" role="dialog" aria-label="Cookie consent"><div class="glass consent-card"><p>We use cookies to run Google AdSense advertising, which keeps our articles free. With your consent, ads may be personalised. You can withdraw consent anytime via the <a href="../../privacy/index.html" style="color:var(--cream)">Privacy page</a>.</p><div class="consent-row"><button class="btn btn-primary" id="c-accept">Accept all</button><button class="btn" id="c-ess">Non-personalised only</button><button class="btn" id="c-rej">Reject</button></div></div></div>
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"A VPN Still Matters: Why It Won't Stop AI From Collecting Your Data","description":"A VPN still protects your connection on untrusted Wi-Fi and stops ISP snooping, but it cannot stop AI platforms from collecting what you type, upload, or do while signed in.","image":"https://house603.com/og-image.png","datePublished":"2026-10-21","dateModified":"2026-10-21","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https://house603.com/technuggets/vpn-wont-stop-ai-data-collection/"},"author":{"@type":"Person","name":"Omobolade Odeniyi","jobTitle":"Lead Contributor","hasCredential":["ISO/IEC 27001","ISO/IEC 27701"]},"publisher":{"@type":"Organization","name":"HOUSE603 Ventures","logo":{"@type":"ImageObject","url":"https://house603.com/apple-touch-icon.png"}}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"A VPN Still Matters: Why It Won't Stop AI From Collecting Your Data","description":"A VPN still protects your connection on untrusted Wi-Fi and stops ISP snooping, but it cannot stop AI platforms from collecting what you type, upload, or do while signed in.","image":"https://house603.com/og-image.png","datePublished":"2026-10-21","dateModified":"2026-11-11","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https://house603.com/technuggets/vpn-wont-stop-ai-data-collection/"},"speakable":{"@type":"SpeakableSpecification","cssSelector":[".quick-answer p"]},"about":[{"@type":"Thing","name":"Virtual private network","sameAs":"https://en.wikipedia.org/wiki/Virtual_private_network"},{"@type":"Thing","name":"Artificial intelligence","sameAs":"https://en.wikipedia.org/wiki/Artificial_intelligence"}],"mentions":[{"@type":"Thing","name":"General Data Protection Regulation","sameAs":"https://en.wikipedia.org/wiki/General_Data_Protection_Regulation"},{"@type":"Thing","name":"ISO/IEC 27001","sameAs":"https://en.wikipedia.org/wiki/ISO/IEC_27001"}],"author":{"@type":"Person","name":"Omobolade Odeniyi","jobTitle":"Lead Contributor","hasCredential":["ISO/IEC 27001","ISO/IEC 27701"]},"publisher":{"@type":"Organization","name":"HOUSE603 Ventures","logo":{"@type":"ImageObject","url":"https://house603.com/apple-touch-icon.png"}}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does a VPN prevent AI companies from training on my data?","acceptedAnswer":{"@type":"Answer","text":"No. A VPN encrypts your network connection between your computer and the VPN server to prevent local Wi-Fi and ISP monitoring, but once your traffic reaches the AI platform, data you submit while signed in is governed by the platform's terms of service and model training settings."}},{"@type":"Question","name":"Why should remote workers still use a VPN when using AI tools?","acceptedAnswer":{"@type":"Answer","text":"A VPN encrypts local traffic, prevents eavesdropping on hotel, airport, and coworking Wi-Fi networks, conceals your true IP address, and stops rogue networks from inspecting your DNS requests and web destinations."}},{"@type":"Question","name":"How can organizations prevent confidential data leaks into consumer AI tools?","acceptedAnswer":{"@type":"Answer","text":"Organizations should deploy contractually protected enterprise AI workspaces that legally exclude model training on customer data, enforce password managers with alias masking like NordPass, and document controls under ISO/IEC 42001 and ISO/IEC 27701."}}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://house603.com/"},{"@type":"ListItem","position":2,"name":"Articles","item":"https://house603.com/articles/"},{"@type":"ListItem","position":3,"name":"A VPN Still Matters: Why It Won't Stop AI Data Collection","item":"https://house603.com/technuggets/vpn-wont-stop-ai-data-collection/"}]}</script>
 
-<script src="/article-page.js?v=1"></script>
+<script src="../../article-page.js?v=1"></script>
 </body></html>

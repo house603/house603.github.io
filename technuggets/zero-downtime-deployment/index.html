@@ -60,6 +60,52 @@ nginx -t &amp;&amp; systemctl reload nginx   # graceful, connection-draining rel
     <h2>6. Smoke test in production</h2>
     <p>The second the switch lands, run a few read-only checks against the live URL. Load the homepage, hit one core API route, fetch a static asset. It takes ten seconds, and it means you learn the release is bad from your own terminal rather than from a customer email forty minutes later.</p>
 
+    <div class="table-wrap">
+      <table class="article-table">
+        <caption>Zero-Downtime Deployment Gate &amp; Verification Matrix</caption>
+        <thead>
+          <tr>
+            <th>Deployment Stage</th>
+            <th>Gate Verification Action</th>
+            <th>Pass Criteria</th>
+            <th>Automated Rollback Trigger</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1. Build &amp; Package</strong></td>
+            <td>Compile immutable tarball with git commit SHA</td>
+            <td>Artifact checksum generated and validated</td>
+            <td>Build failure or test suite failure aborts run</td>
+          </tr>
+          <tr>
+            <td><strong>2. Database Migration</strong></td>
+            <td>Apply additive, backward-compatible DDL schemas</td>
+            <td>Zero column deletions; old app version continues executing</td>
+            <td>Migration timeout or lock contention halts deploy</td>
+          </tr>
+          <tr>
+            <td><strong>3. Health Check Gate</strong></td>
+            <td>Poll <code>/healthz</code> on new isolated local port</td>
+            <td>HTTP 200 within 30-second polling window</td>
+            <td>Failing health check leaves existing proxy route untouched</td>
+          </tr>
+          <tr>
+            <td><strong>4. Proxy Reload &amp; Drain</strong></td>
+            <td>Nginx configuration test and graceful reload</td>
+            <td>In-flight connections drained without 502/504 drops</td>
+            <td>Revert proxy configuration file and reload Nginx</td>
+          </tr>
+          <tr>
+            <td><strong>5. Post-Deploy Smoke Test</strong></td>
+            <td>Execute read-only HTTP probes on live production endpoints</td>
+            <td>Status 200 and P95 latency under operational threshold</td>
+            <td>One-command proxy pointer reversal back to previous port</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
     <h2>7. Watch, then keep rollback one command away</h2>
     <p>Stay on the error rate and p95 latency for about ten minutes; most bad deploys announce themselves inside the first five. If one does, rollback is not a scramble, because the previous artifact is still sitting on disk and the proxy switch was a single edit, so undoing it is the same move backwards. Wire the whole sequence into CI so a deploy, and a rollback, is one button:</p>
     <pre><code># .github/workflows/deploy.yml (excerpt)
@@ -82,8 +128,8 @@ jobs:
   <div class="adslot" aria-hidden="true"><span class="ad-label">Advertisement</span><ins class="adsbygoogle" style="display:block" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
 
   <div class="related"><div class="r-label">Keep reading</div><div class="rcards">
-    <a class="glass rcard" href="../../technuggets/cloud-right-sizing/"><span class="rc-cat">Cloud Infrastructure</span><h4>Right-Sizing Cloud Compute: Cut 30 to 50% Off Your Bill Without Downtime</h4></a>
-    <a class="glass rcard" href="../../technuggets/static-first-architecture/"><span class="rc-cat">Web Architecture</span><h4>Static-First Web Architecture: Ship Fast Sites That Survive Traffic Spikes</h4></a>
+    <a class="glass rcard" href="../../technuggets/cloud-right-sizing/index.html"><span class="rc-cat">Cloud Infrastructure</span><h4>Right-Sizing Cloud Compute: Cut 30 to 50% Off Your Bill Without Downtime</h4></a>
+    <a class="glass rcard" href="../../technuggets/static-first-architecture/index.html"><span class="rc-cat">Web Architecture</span><h4>Static-First Web Architecture: Ship Fast Sites That Survive Traffic Spikes</h4></a>
   </div></div>
 </article></div></main>
 
@@ -93,9 +139,10 @@ jobs:
 
 <div class="consent" id="consent" role="dialog" aria-label="Cookie consent"><div class="glass consent-card"><p>We use cookies to run Google AdSense advertising, which keeps our articles free. With your consent, ads may be personalised. You can withdraw consent anytime via the <a href="../../privacy/index.html" style="color:var(--cream)">Privacy page</a>.</p><div class="consent-row"><button class="btn btn-primary" id="c-accept">Accept all</button><button class="btn" id="c-ess">Non-personalised only</button><button class="btn" id="c-rej">Reject</button></div></div></div>
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"The Zero-Downtime Deployment Checklist for Small Teams","description":"A rehearsable, reversible deployment process that lets a two-person team ship in the middle of the day without dropping a request.","image":"https://house603.com/og-image.png","datePublished":"2026-09-09","dateModified":"2026-09-16","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https://house603.com/technuggets/zero-downtime-deployment/"},"author":{"@type":"Person","name":"Omobolade Odeniyi","jobTitle":"Lead Contributor","hasCredential":["ISO/IEC 27001","ISO/IEC 27701"]},"publisher":{"@type":"Organization","name":"HOUSE603 Ventures","logo":{"@type":"ImageObject","url":"https://house603.com/apple-touch-icon.png"}}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"The Zero-Downtime Deployment Checklist for Small Teams","description":"A rehearsable, reversible deployment process that lets a two-person team ship in the middle of the day without dropping a request.","image":"https://house603.com/og-image.png","datePublished":"2026-09-09","dateModified":"2026-11-11","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https://house603.com/technuggets/zero-downtime-deployment/"},"speakable":{"@type":"SpeakableSpecification","cssSelector":[".quick-answer p"]},"about":[{"@type":"Thing","name":"Software deployment","sameAs":"https://en.wikipedia.org/wiki/Software_deployment"},{"@type":"Thing","name":"Continuous deployment","sameAs":"https://en.wikipedia.org/wiki/Continuous_deployment"}],"mentions":[{"@type":"Thing","name":"Nginx","sameAs":"https://en.wikipedia.org/wiki/Nginx"},{"@type":"Thing","name":"Systemd","sameAs":"https://en.wikipedia.org/wiki/Systemd"}],"author":{"@type":"Person","name":"Omobolade Odeniyi","jobTitle":"Lead Contributor","hasCredential":["ISO/IEC 27001","ISO/IEC 27701"]},"publisher":{"@type":"Organization","name":"HOUSE603 Ventures","logo":{"@type":"ImageObject","url":"https://house603.com/apple-touch-icon.png"}}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Deploy with zero downtime on a small team","description":"A rehearsable, reversible release process a two-person team can run in daylight.","step":[{"@type":"HowToStep","position":1,"name":"Build an immutable, versioned artifact","url":"https://house603.com/technuggets/zero-downtime-deployment/#s1"},{"@type":"HowToStep","position":2,"name":"Make database migrations backward compatible","url":"https://house603.com/technuggets/zero-downtime-deployment/#s2"},{"@type":"HowToStep","position":3,"name":"Release beside the running version","url":"https://house603.com/technuggets/zero-downtime-deployment/#s3"},{"@type":"HowToStep","position":4,"name":"Pass a health check before receiving traffic","url":"https://house603.com/technuggets/zero-downtime-deployment/#s4"},{"@type":"HowToStep","position":5,"name":"Drain and switch","url":"https://house603.com/technuggets/zero-downtime-deployment/#s5"},{"@type":"HowToStep","position":6,"name":"Smoke test in production","url":"https://house603.com/technuggets/zero-downtime-deployment/#s6"},{"@type":"HowToStep","position":7,"name":"Watch, then keep rollback one command away","url":"https://house603.com/technuggets/zero-downtime-deployment/#s7"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is zero-downtime deployment?","acceptedAnswer":{"@type":"Answer","text":"Zero-downtime deployment is an automated deployment strategy where an updated software version is staged, health-checked, and brought online beside the running version before traffic is switched, preventing dropped user connections."}},{"@type":"Question","name":"How can small engineering teams handle database migrations without downtime?","acceptedAnswer":{"@type":"Answer","text":"Database migrations must be strictly additive and backward-compatible (adding nullable columns or new tables rather than dropping or renaming columns immediately). The existing version of the app must continue running normally while the migration applies."}},{"@type":"Question","name":"Why is connection draining essential during a reverse proxy switch?","acceptedAnswer":{"@type":"Answer","text":"Connection draining allows the reverse proxy (such as Nginx) to complete in-flight HTTP requests and active transactions on the old workers before retiring them, eliminating 502 Bad Gateway and dropped request errors."}}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://house603.com/"},{"@type":"ListItem","position":2,"name":"Articles","item":"https://house603.com/articles/"},{"@type":"ListItem","position":3,"name":"Zero-Downtime Deployment","item":"https://house603.com/technuggets/zero-downtime-deployment/"}]}</script>
 
-<script src="/article-page.js?v=1"></script>
+<script src="../../article-page.js?v=1"></script>
 </body></html>

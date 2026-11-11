@@ -44,6 +44,51 @@ aws cloudwatch get-metric-statistics \
     </ul>
     <p>Get the family right first, then step the size down one notch at a time and watch a full day before the next drop. Resist making one big move to feel efficient; small steps are what keep this boring. And where the workload allows it, prefer two smaller instances behind a load balancer over a single large one. It usually costs a little less, and it turns losing a node into a shrug rather than an outage.</p>
 
+    <div class="table-wrap">
+      <table class="article-table">
+        <caption>Cloud Compute Family &amp; Right-Sizing Benchmark Matrix</caption>
+        <thead>
+          <tr>
+            <th>Workload Profile</th>
+            <th>Recommended Family</th>
+            <th>Target P95 Metric</th>
+            <th>Memory &amp; I/O Guardrail</th>
+            <th>Projected Savings</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Spiky / Web APIs</strong></td>
+            <td>Burstable (AWS T4g / Azure B-series)</td>
+            <td>CPU P95 &lt; 20%</td>
+            <td>Verify baseline credit accrual &gt; debit rate</td>
+            <td>30% to 50%</td>
+          </tr>
+          <tr>
+            <td><strong>Continuous Compute</strong></td>
+            <td>Compute-Optimized (AWS C7g / GCP c3)</td>
+            <td>CPU P95 between 65% and 80%</td>
+            <td>Check network egress PPS and EBS IOPS</td>
+            <td>25% to 40%</td>
+          </tr>
+          <tr>
+            <td><strong>Databases &amp; Caches</strong></td>
+            <td>Memory-Optimized (AWS R7g / GCP m3)</td>
+            <td>RAM P95 between 60% and 75%</td>
+            <td>Never downsize without headroom for OS pagecache</td>
+            <td>20% to 35%</td>
+          </tr>
+          <tr>
+            <td><strong>Dev / QA Staging</strong></td>
+            <td>Automated off-hours shutdown schedule</td>
+            <td>Running 60 hrs/wk instead of 168 hrs</td>
+            <td>Store state in persistent volumes before stopping</td>
+            <td>Up to 65%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
     <h2>Step 4: Prove it in staging, then apply with code</h2>
     <p>Do not resize by clicking around the console. A console change is invisible to the rest of the team, unreviewed, and awkward to undo. Put the size in infrastructure-as-code instead, so it gets a pull request, a second pair of eyes, and a one-line road back if the graphs turn ugly:</p>
     <pre><code># variables.tf
@@ -77,13 +122,13 @@ resource "aws_instance" "web" {
   </div>
 
   <div class="glass art-cta"><h3>Want the exact number for your account, and a plan to hit it?</h3><p>HOUSE603 runs a fixed-scope cloud cost review that turns these steps into a right-sizing plan and the infrastructure-as-code to apply it, without downtime. It is part of our Digital Transformation practice.</p><a class="btn btn-primary" href="../../services.html">Book a cloud cost review &rarr;</a></div>
-  <p class="article-body" style="font-size:14.5px;color:var(--soft)">Try it yourself: the <a href="/articles/#tools">Infrastructure Cost Estimator</a> models your monthly spend and shows the right-sizing headroom described above.</p>
+  <p class="article-body" style="font-size:14.5px;color:var(--soft)">Try it yourself: the <a href="../../articles/index.html#tools">Infrastructure Cost Estimator</a> models your monthly spend and shows the right-sizing headroom described above.</p>
 
   <div class="adslot" aria-hidden="true"><span class="ad-label">Advertisement</span><ins class="adsbygoogle" style="display:block" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
 
   <div class="related"><div class="r-label">Keep reading</div><div class="rcards">
-    <a class="glass rcard" href="../../technuggets/static-first-architecture/"><span class="rc-cat">Web Architecture</span><h4>Static-First Web Architecture: Ship Fast Sites That Survive Traffic Spikes</h4></a>
-    <a class="glass rcard" href="../../technuggets/zero-downtime-deployment/"><span class="rc-cat">Systems Management</span><h4>The Zero-Downtime Deployment Checklist for Small Teams</h4></a>
+    <a class="glass rcard" href="../../technuggets/static-first-architecture/index.html"><span class="rc-cat">Web Architecture</span><h4>Static-First Web Architecture: Ship Fast Sites That Survive Traffic Spikes</h4></a>
+    <a class="glass rcard" href="../../technuggets/zero-downtime-deployment/index.html"><span class="rc-cat">Systems Management</span><h4>The Zero-Downtime Deployment Checklist for Small Teams</h4></a>
   </div></div>
 </article></div></main>
 
@@ -93,8 +138,10 @@ resource "aws_instance" "web" {
 
 <div class="consent" id="consent" role="dialog" aria-label="Cookie consent"><div class="glass consent-card"><p>We use cookies to run Google AdSense advertising, which keeps our articles free. With your consent, ads may be personalised. You can withdraw consent anytime via the <a href="../../privacy/index.html" style="color:var(--cream)">Privacy page</a>.</p><div class="consent-row"><button class="btn btn-primary" id="c-accept">Accept all</button><button class="btn" id="c-ess">Non-personalised only</button><button class="btn" id="c-rej">Reject</button></div></div></div>
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Right-Sizing Cloud Compute: Cut 30 to 50 Percent Off Your Bill Without Downtime","description":"A metrics-driven method to right-size cloud instances and cut 30 to 50 percent off compute spend without downtime.","image":"https://house603.com/og-image.png","datePublished":"2026-08-12","dateModified":"2026-09-16","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https://house603.com/technuggets/cloud-right-sizing/"},"author":{"@type":"Person","name":"Omobolade Odeniyi","jobTitle":"Lead Contributor","hasCredential":["ISO/IEC 27001","ISO/IEC 27701"]},"publisher":{"@type":"Organization","name":"HOUSE603 Ventures","logo":{"@type":"ImageObject","url":"https://house603.com/apple-touch-icon.png"}}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Right-Sizing Cloud Compute: Cut 30 to 50 Percent Off Your Bill Without Downtime","description":"A metrics-driven method to right-size cloud instances and cut 30 to 50 percent off compute spend without downtime.","image":"https://house603.com/og-image.png","datePublished":"2026-08-12","dateModified":"2026-11-11","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https://house603.com/technuggets/cloud-right-sizing/"},"speakable":{"@type":"SpeakableSpecification","cssSelector":[".quick-answer p"]},"about":[{"@type":"Thing","name":"Cloud computing","sameAs":"https://en.wikipedia.org/wiki/Cloud_computing"},{"@type":"Thing","name":"Amazon Elastic Compute Cloud","sameAs":"https://en.wikipedia.org/wiki/Amazon_Elastic_Compute_Cloud"}],"mentions":[{"@type":"Thing","name":"Terraform","sameAs":"https://en.wikipedia.org/wiki/Terraform_(software)"},{"@type":"Thing","name":"Amazon CloudWatch","sameAs":"https://en.wikipedia.org/wiki/Amazon_CloudWatch"}],"author":{"@type":"Person","name":"Omobolade Odeniyi","jobTitle":"Lead Contributor","hasCredential":["ISO/IEC 27001","ISO/IEC 27701"]},"publisher":{"@type":"Organization","name":"HOUSE603 Ventures","logo":{"@type":"ImageObject","url":"https://house603.com/apple-touch-icon.png"}}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to Right-Size Cloud Compute Without Downtime","description":"A 6-step metrics-driven workflow to reduce cloud instance over-provisioning and cut compute costs by 30 to 50 percent.","step":[{"@type":"HowToStep","position":1,"name":"Baseline with real metrics","text":"Observe CloudWatch or Azure Monitor P95 CPU and memory utilization over four representative weeks rather than headline averages."},{"@type":"HowToStep","position":2,"name":"Measure memory and I/O alongside CPU","text":"Install the CloudWatch agent to capture RAM and disk throughput metrics before changing instance shapes to avoid memory exhaustion."},{"@type":"HowToStep","position":3,"name":"Match workload profile to instance family","text":"Map spiky workloads to burstable instances (T-series), sustained workloads to compute-optimized (C-series), and caches to memory-optimized (R-series)."},{"@type":"HowToStep","position":4,"name":"Test in staging and apply with Terraform","text":"Define instance sizes in infrastructure-as-code variables, run staging load tests, and promote to production during business hours."},{"@type":"HowToStep","position":5,"name":"Automate non-production shutdowns","text":"Schedule cron scripts or cloud schedulers to shut down development and staging fleets during off-hours, saving up to 65 percent."},{"@type":"HowToStep","position":6,"name":"Lock in discounts on honest baselines","text":"Purchase 1-year or 3-year Savings Plans or Reserved Instances only after right-sizing the steady-state baseline footprint."}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much can right-sizing cloud compute save?","acceptedAnswer":{"@type":"Answer","text":"Most production fleets achieve between 30 and 50 percent cost reduction through a combination of instance downsizing, automated off-hours shutdowns for staging environments, and baseline commitment discounts."}},{"@type":"Question","name":"Why is CPU-only right-sizing dangerous?","acceptedAnswer":{"@type":"Answer","text":"Default cloud metrics only report CPU utilization. Downsizing based solely on low CPU usage frequently causes out-of-memory errors or I/O bottlenecks if the service is memory-bound or disk-bound."}},{"@type":"Question","name":"Should you purchase Reserved Instances before or after right-sizing?","acceptedAnswer":{"@type":"Answer","text":"Always right-size before committing to reservations. Purchasing Reserved Instances or Savings Plans against an over-provisioned footprint locks in paying for unused capacity for the full contract term."}}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://house603.com/"},{"@type":"ListItem","position":2,"name":"Articles","item":"https://house603.com/articles/"},{"@type":"ListItem","position":3,"name":"Right-Sizing Cloud Compute","item":"https://house603.com/technuggets/cloud-right-sizing/"}]}</script>
 
-<script src="/article-page.js?v=1"></script>
+<script src="../../article-page.js?v=1"></script>
 </body></html>

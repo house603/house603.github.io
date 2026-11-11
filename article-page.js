@@ -1,4 +1,4 @@
-/* article-page.js — shared behaviour for HOUSE603 article pages.
+/* article-page.js: shared behaviour for HOUSE603 article pages.
    Nav, reveal-on-scroll, reading progress, glass tilt, CTA modal,
    cookie consent, and config-gated Google AdSense loading. */
 (function () {

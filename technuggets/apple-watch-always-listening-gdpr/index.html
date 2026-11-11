@@ -72,6 +72,46 @@
 
     <p>Legitimate interests, the other basis people reach for, does not rescue it either. That test weighs your interest against the rights and reasonable expectations of the people affected, and "I wanted an AI summary of my day" is a weak interest set against a stranger's reasonable expectation that their private remarks are not being transcribed by the person next to them. It gets worse where the words touch <strong>special-category data</strong>: health, religion, politics, sexual life, trade-union membership. People say those things out loud all the time. Article 9 puts a much higher bar on processing them, and a passive listening feature does nothing to clear it.</p>
 
+    <div class="table-wrap">
+      <table class="article-table">
+        <caption>Compliance Matrix: Ambient Wearable Audio vs. Statutory Mandates</caption>
+        <thead>
+          <tr>
+            <th>Regulatory Mandate</th>
+            <th>Statutory Requirement</th>
+            <th>Wearable Audio Conflict</th>
+            <th>Enterprise Risk Control</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>GDPR Article 4(1)</strong></td>
+            <td>Personal data includes any information relating to an identified or identifiable natural person</td>
+            <td>Transcripts, speaker turns, and contextual quotes remain personal data even if raw audio is discarded</td>
+            <td>Mandate Data Protection Impact Assessments (DPIA) before workplace deployment</td>
+          </tr>
+          <tr>
+            <td><strong>GDPR Article 6 &amp; 7</strong></td>
+            <td>Lawful basis requires unambiguous, freely given, specific consent or demonstrable legitimate interest</td>
+            <td>Bystanders within earshot never consented to ambient recording or automated transcription</td>
+            <td>Prohibit ambient listening in sensitive corporate meeting rooms via BYOD policies</td>
+          </tr>
+          <tr>
+            <td><strong>GDPR Article 9</strong></td>
+            <td>Heightened protection for special-category data (health, biometric, political, religious)</td>
+            <td>Passive microphones indiscriminately capture sensitive remarks spoken aloud in private settings</td>
+            <td>Deploy MDM profiles to enforce hardware-level microphone restrictions on managed devices</td>
+          </tr>
+          <tr>
+            <td><strong>US All-Party Consent Laws</strong></td>
+            <td>Two-party consent required for intercepting private conversations (CA, MA, PA, WA)</td>
+            <td>On-device real-time acoustic transcription may trigger statutory eavesdropping definitions</td>
+            <td>Require explicit verbal disclosure or physical mute toggles during business meetings</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
     <h2>This is not only a European worry</h2>
     <p>The same instinct is showing up in US law from a different direction. Several states, including California, Massachusetts, Pennsylvania and Washington, require every party to a private conversation to agree before it is intercepted. Lawyers in those states are openly unconvinced that on-device processing and a deleted audio file keep users clear of wiretap and eavesdropping statutes. The Electronic Frontier Foundation has called always-on monitoring of conversations <q>an unacceptable burden on our conversational privacy.</q> It comes from a different legal tradition and lands on the same concern: capturing people who never agreed is the problem, and the storage detail does not change that.</p>
 
@@ -97,8 +137,8 @@
   <div class="glass art-cta"><h3>Not sure where always-listening tech leaves your obligations?</h3><p>HOUSE603 runs GDPR and ISO/IEC 27701 readiness, including the DPIA and acceptable-use work that turns questions like this into a policy your team can actually follow. It sits inside our Information Security practice.</p><a class="btn btn-primary" href="../../services.html">Talk to us about a DPIA &rarr;</a></div>
 
   <div class="related"><div class="r-label">Keep reading</div><div class="rcards">
-    <a class="glass rcard" href="../../technuggets/vpn-wont-stop-ai-data-collection/"><span class="rc-cat">Data Protection</span><h4>A VPN Still Matters: Why It Won't Stop AI From Collecting Your Data</h4></a>
-    <a class="glass rcard" href="../../technuggets/static-first-architecture/"><span class="rc-cat">Web Architecture</span><h4>Static-First Web Architecture: Ship Fast Sites That Survive Traffic Spikes</h4></a>
+    <a class="glass rcard" href="../../technuggets/vpn-wont-stop-ai-data-collection/index.html"><span class="rc-cat">Data Protection</span><h4>A VPN Still Matters: Why It Won't Stop AI From Collecting Your Data</h4></a>
+    <a class="glass rcard" href="../../technuggets/static-first-architecture/index.html"><span class="rc-cat">Web Architecture</span><h4>Static-First Web Architecture: Ship Fast Sites That Survive Traffic Spikes</h4></a>
   </div></div>
 
   <p class="article-body" style="font-size:12.5px;color:var(--mute);margin-top:30px">Sources: <a href="https://support.apple.com/en-us/148354" target="_blank" rel="noopener">Apple Support: Audio Intelligence on Apple Watch</a>; <a href="https://techcrunch.com/2026/09/09/apple-watchs-new-ai-features-are-normalizing-the-idea-that-technology-is-always-listening/" target="_blank" rel="noopener">TechCrunch</a>; <a href="https://9to5mac.com/2026/09/15/new-apple-watch-features-may-require-new-legal-precedent-for-privacy/" target="_blank" rel="noopener">9to5Mac</a>. Device features are as announced in September 2026 and may change; confirm current behaviour with Apple.</p>
@@ -110,8 +150,9 @@
 
 <div class="consent" id="consent" role="dialog" aria-label="Cookie consent"><div class="glass consent-card"><p>We use cookies to run Google AdSense advertising, which keeps our articles free. With your consent, ads may be personalised. You can withdraw consent anytime via the <a href="../../privacy/index.html" style="color:var(--cream)">Privacy page</a>.</p><div class="consent-row"><button class="btn btn-primary" id="c-accept">Accept all</button><button class="btn" id="c-ess">Non-personalised only</button><button class="btn" id="c-rej">Reject</button></div></div></div>
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"The Always-Listening Watch: What Apple's Audio Intelligence Means Under GDPR","description":"Apple Watch Series 12 and Ultra 4 listen all day for Live Rewind and Siri Recap. Apple says no raw audio is stored, but under GDPR a transcript of a bystander is still their personal data.","image":"https://house603.com/og-image.png","datePublished":"2026-09-21","dateModified":"2026-09-21","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https://house603.com/technuggets/apple-watch-always-listening-gdpr/"},"author":{"@type":"Person","name":"Omobolade Odeniyi","jobTitle":"Lead Contributor","hasCredential":["ISO/IEC 27001","ISO/IEC 27701"]},"publisher":{"@type":"Organization","name":"HOUSE603 Ventures","logo":{"@type":"ImageObject","url":"https://house603.com/apple-touch-icon.png"}}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"The Always-Listening Watch: What Apple's Audio Intelligence Means Under GDPR","description":"Apple Watch Series 12 and Ultra 4 listen all day for Live Rewind and Siri Recap. Apple says no raw audio is stored, but under GDPR a transcript of a bystander is still their personal data.","image":"https://house603.com/og-image.png","datePublished":"2026-09-21","dateModified":"2026-11-11","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https://house603.com/technuggets/apple-watch-always-listening-gdpr/"},"speakable":{"@type":"SpeakableSpecification","cssSelector":[".quick-answer p"]},"about":[{"@type":"Thing","name":"Apple Watch","sameAs":"https://en.wikipedia.org/wiki/Apple_Watch"},{"@type":"Thing","name":"General Data Protection Regulation","sameAs":"https://en.wikipedia.org/wiki/General_Data_Protection_Regulation"}],"mentions":[{"@type":"Thing","name":"ISO/IEC 27701","sameAs":"https://en.wikipedia.org/wiki/ISO/IEC_27701"},{"@type":"Thing","name":"Electronic Frontier Foundation","sameAs":"https://en.wikipedia.org/wiki/Electronic_Frontier_Foundation"}],"author":{"@type":"Person","name":"Omobolade Odeniyi","jobTitle":"Lead Contributor","hasCredential":["ISO/IEC 27001","ISO/IEC 27701"]},"publisher":{"@type":"Organization","name":"HOUSE603 Ventures","logo":{"@type":"ImageObject","url":"https://house603.com/apple-touch-icon.png"}}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is an audio transcript considered personal data under GDPR if raw audio is discarded?","acceptedAnswer":{"@type":"Answer","text":"Yes. Under GDPR Article 4(1), personal data encompasses any information relating to an identified or identifiable natural person. Even if audio recordings are discarded immediately after transcription, the resulting text logs, speaker references, and contextual remarks remain personal data."}},{"@type":"Question","name":"Can an Apple Watch owner's opt-in consent legally cover bystanders?","acceptedAnswer":{"@type":"Answer","text":"No. Consent under GDPR Article 7 must be freely given, specific, informed, and unambiguous. A wearable owner opting into ambient transcription cannot provide valid consent on behalf of third parties or colleagues within earshot."}},{"@type":"Question","name":"How can organizations manage wearable audio recording risks under ISO 27701?","acceptedAnswer":{"@type":"Answer","text":"Organizations should conduct a Data Protection Impact Assessment (DPIA), update Bring Your Own Device (BYOD) policies to restrict ambient listening in confidential meeting zones, and utilize Mobile Device Management (MDM) profiles to enforce hardware-level restrictions."}}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://house603.com/"},{"@type":"ListItem","position":2,"name":"Articles","item":"https://house603.com/articles/"},{"@type":"ListItem","position":3,"name":"The Always-Listening Watch and GDPR","item":"https://house603.com/technuggets/apple-watch-always-listening-gdpr/"}]}</script>
 
-<script src="/article-page.js?v=1"></script>
+<script src="../../article-page.js?v=1"></script>
 </body></html>

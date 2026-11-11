@@ -18,9 +18,22 @@ HOUSE603 is remote-first and works with teams worldwide. Contact: info@house603.
 
 The security practice is led by certified practitioners (CISSP, CISM, ISO 27001/42001 Lead Auditor).
 
-## Pages
+## Core pages
 - Home: https://house603.com/
 - Services: https://house603.com/services.html
 - Projects (Selected Works): https://projects.house603.com/
+- Articles Hub: https://house603.com/articles/
 - About: https://house603.com/about.html
 - Contact: https://house603.com/contact.html
+- Privacy: https://house603.com/privacy/
+
+## Interactive tools
+- Infrastructure Cost Estimator: https://house603.com/articles/#tools (Browser-based modeler for monthly vCPU, RAM, block storage, and network egress costs with right-sizing projections).
+
+## Technical field notes and engineering guides
+- Will AI Take My Job? The Real Story Behind Industry Retooling: https://house603.com/technuggets/will-ai-take-my-job/ (Analysis of task compression vs human judgment, workforce retraining habits, and ISO 42001 governance).
+- A VPN Still Matters: Why It Won't Stop AI From Collecting Your Data: https://house603.com/technuggets/vpn-wont-stop-ai-data-collection/ (Technical breakdown of transport encryption vs application layer data collection, credential isolation, and GDPR/ISO 27701 controls).
+- The Always-Listening Watch: Apple Audio Intelligence and GDPR: https://house603.com/technuggets/apple-watch-always-listening-gdpr/ (Legal and privacy engineering review of ambient wearable recording, bystander consent, and GDPR Article 4/6 compliance).
+- Right-Sizing Cloud Compute: Cut 30 to 50% Off Your Bill Without Downtime: https://house603.com/technuggets/cloud-right-sizing/ (Metrics-driven methodology for AWS/GCP instance optimization using P95 metrics, Terraform, and automated off-peak scheduling).
+- Static-First Web Architecture: Ship Fast Sites That Survive Traffic Spikes: https://house603.com/technuggets/static-first-architecture/ (Architecture for edge pre-rendering, modern Cache-Control headers, and origin isolation).
+- The Zero-Downtime Deployment Checklist for Small Teams: https://house603.com/technuggets/zero-downtime-deployment/ (Seven-step rehearsable release workflow using immutable artifacts, systemd socket activation, nginx connection draining, and instant rollback).

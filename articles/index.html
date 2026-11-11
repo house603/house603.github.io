@@ -4,8 +4,12 @@
 
 <section class="page-hero" id="home"><div class="eyebrow reveal">Articles</div><h1 class="reveal d1">Field notes from the <em>studio.</em></h1><p class="sub reveal d2">Practical, senior-level engineering on cloud infrastructure, web architecture, and systems management, written by the people who build and secure production systems at HOUSE603.</p></section>
 
-<section class="article-main" style="padding-top:10px">
+<section class="article-main" style="padding-top:clamp(36px,5vw,60px)">
   <div class="wrap">
+    <div class="sec-head reveal" style="margin-bottom:24px">
+      <h2 class="sec-title">Engineering Briefings &amp; <em>Guides.</em></h2>
+      <p class="sec-sub">Peer-reviewed architectural patterns, cloud cost optimizations, and information security briefings.</p>
+    </div>
     <div class="filterow reveal" role="tablist" aria-label="Filter articles">
       <button class="filt on" data-filter="all">All</button>
       <button class="filt" data-filter="cloud">Cloud</button>
@@ -14,42 +18,42 @@
       <button class="filt" data-filter="privacy">Privacy</button>
     </div>
     <div class="post-grid">
-      <a class="glass pcard-link reveal d1" data-cat="systems" href="../technuggets/will-ai-take-my-job/">
+      <a class="glass pcard-link reveal d1" data-cat="systems" href="../technuggets/will-ai-take-my-job/index.html">
         <span class="pc-cat">Workforce &amp; Systems</span>
         <h3>Will AI Take My Job? Why "Someone Who Uses AI Will" Is Only Half the Answer</h3>
         <p>The popular slogan misses the real story of industry retooling, workforce retraining, and learning, unlearning, and relearning in real time.</p>
         <span class="pc-meta">22 Oct 2026 &middot; 8 min read</span>
         <span class="pc-more">Read <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </a>
-      <a class="glass pcard-link reveal d1" data-cat="privacy" href="../technuggets/vpn-wont-stop-ai-data-collection/">
+      <a class="glass pcard-link reveal d1" data-cat="privacy" href="../technuggets/vpn-wont-stop-ai-data-collection/index.html">
         <span class="pc-cat">Data Protection</span>
         <h3>A VPN Still Matters: Why It Won't Stop AI From Collecting Your Data</h3>
         <p>A VPN encrypts your network connection and hides your IP, but AI collection happens inside your account and app. Here is how to handle both.</p>
         <span class="pc-meta">21 Oct 2026 &middot; 7 min read</span>
         <span class="pc-more">Read <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </a>
-      <a class="glass pcard-link reveal d1" data-cat="privacy" href="../technuggets/apple-watch-always-listening-gdpr/">
+      <a class="glass pcard-link reveal d1" data-cat="privacy" href="../technuggets/apple-watch-always-listening-gdpr/index.html">
         <span class="pc-cat">Data Protection</span>
         <h3>The Always-Listening Watch: Apple's Audio Intelligence and GDPR</h3>
         <p>Apple's newest watches listen all day. Apple says no audio is stored, but under GDPR a transcript of a bystander is still their personal data.</p>
         <span class="pc-meta">21 Sep 2026 &middot; 6 min read</span>
         <span class="pc-more">Read <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </a>
-      <a class="glass pcard-link reveal d1" data-cat="cloud" href="../technuggets/cloud-right-sizing/">
+      <a class="glass pcard-link reveal d1" data-cat="cloud" href="../technuggets/cloud-right-sizing/index.html">
         <span class="pc-cat">Cloud Infrastructure</span>
         <h3>Right-Sizing Cloud Compute: Cut 30 to 50% Off Your Bill Without Downtime</h3>
         <p>A metrics-driven method for matching instance type and count to real demand, with AWS CLI, Terraform, and scheduling examples.</p>
         <span class="pc-meta">12 Aug 2026 &middot; 8 min read</span>
         <span class="pc-more">Read <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </a>
-      <a class="glass pcard-link reveal d2" data-cat="web" href="../technuggets/static-first-architecture/">
+      <a class="glass pcard-link reveal d2" data-cat="web" href="../technuggets/static-first-architecture/index.html">
         <span class="pc-cat">Web Architecture</span>
         <h3>Static-First Web Architecture: Ship Fast Sites That Survive Traffic Spikes</h3>
         <p>Pre-render, cache at the edge, and isolate the few endpoints that truly need a server. Cache-control, nginx, and SWR examples.</p>
         <span class="pc-meta">26 Aug 2026 &middot; 7 min read</span>
         <span class="pc-more">Read <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </a>
-      <a class="glass pcard-link reveal d3" data-cat="systems" href="../technuggets/zero-downtime-deployment/">
+      <a class="glass pcard-link reveal d3" data-cat="systems" href="../technuggets/zero-downtime-deployment/index.html">
         <span class="pc-cat">Systems Management</span>
         <h3>The Zero-Downtime Deployment Checklist for Small Teams</h3>
         <p>A rehearsable, reversible release process a two-person team can run in daylight. systemd, nginx, and CI examples.</p>
@@ -101,6 +105,44 @@
   </div>
 </div></section>
 
+<!-- Verified Remote Tooling / Partner section -->
+<section id="tooling"><div class="wrap">
+  <div class="eyebrow reveal">Verified tooling</div>
+  <h2 class="sec-title reveal d1">Recommended Remote <em>Security Stack.</em></h2>
+  <p class="sec-sub reveal d1">The tools we rely on and recommend for distributed engineering teams, remote retooling, and baseline privacy.</p>
+  <div class="aff-disclosure reveal" role="note" aria-label="Affiliate disclosure" style="margin-top:16px"><strong>Disclosure</strong> HOUSE603 participates in the Nord Security affiliate programme. When you purchase through our links, we may earn an affiliate commission at no extra cost to you.</div>
+  <div class="partner-grid reveal d2" style="margin-top:20px">
+    <div class="glass partner-card">
+      <div>
+        <div class="partner-top">
+          <span class="partner-logo-box"><img class="nv-logo" src="../brand-logos/NordVPN_Logo_RGB_Primary_Blue_White.svg" alt="NordVPN official logo" width="140" height="42" loading="lazy"></span>
+          <span class="partner-layer">Transport &middot; WireGuard</span>
+        </div>
+        <h3 style="font-family:var(--serif);font-size:19px;font-weight:600;color:var(--cream);margin:16px 0 6px;line-height:1.25">NordVPN for distributed teams</h3>
+        <p>Secures remote developer workstations with WireGuard-based NordLynx on hotel, airport, and shared Wi-Fi. Features Threat Protection Pro to block malicious scripts and phishing endpoints before they reach the browser.</p>
+      </div>
+      <div class="partner-cta">
+        <span class="p-tag">Network encryption</span>
+        <a class="btn btn-primary" href="https://go.nordvpn.net/aff_c?offer_id=15&amp;aff_id=159119&amp;url_id=902" target="_blank" rel="sponsored noopener">Get NordVPN &rarr;</a>
+      </div>
+    </div>
+    <div class="glass partner-card">
+      <div>
+        <div class="partner-top">
+          <span class="partner-logo-box"><img class="np-logo" src="../brand-logos/nordpass-logo-horizontal.svg" alt="NordPass official logo" width="132" height="21" loading="lazy"></span>
+          <span class="partner-layer">Identity &middot; Passkeys</span>
+        </div>
+        <h3 style="font-family:var(--serif);font-size:19px;font-weight:600;color:var(--cream);margin:16px 0 6px;line-height:1.25">NordPass for credential isolation</h3>
+        <p>Stores passkeys and credentials inside an audited XChaCha20-encrypted vault. Generates masked email aliases and unique passwords for testing new AI tools and SaaS services without risking primary company logins.</p>
+      </div>
+      <div class="partner-cta">
+        <span class="p-tag">Account isolation</span>
+        <a class="btn btn-primary" href="https://go.nordpass.io/aff_c?offer_id=488&amp;aff_id=159119&amp;url_id=9356" target="_blank" rel="sponsored noopener">Get NordPass &rarr;</a>
+      </div>
+    </div>
+  </div>
+</div></section>
+
 <!-- Editorial standards / E-E-A-T -->
 <section id="standards"><div class="wrap">
   <div class="eyebrow reveal">Editorial standards</div>
@@ -131,13 +173,19 @@
 {"@type":"Organization","@id":"https://house603.com/#org","name":"HOUSE603 Ventures","alternateName":"HOUSE603","url":"https://house603.com/","logo":"https://house603.com/apple-touch-icon.png","email":"info@house603.com","sameAs":["https://www.facebook.com/house603"]},
 {"@type":"WebSite","@id":"https://house603.com/#website","name":"HOUSE603","url":"https://house603.com/","publisher":{"@id":"https://house603.com/#org"},"inLanguage":"en"},
 {"@type":"Person","@id":"https://house603.com/#omobolade","name":"Omobolade Odeniyi","jobTitle":"Lead Contributor","worksFor":{"@id":"https://house603.com/#org"},"hasCredential":["ISO/IEC 27001","ISO/IEC 27701"]},
-{"@type":"Blog","@id":"https://house603.com/articles/#blog","name":"HOUSE603 Articles","url":"https://house603.com/articles/","description":"Practical, senior-level engineering field notes on cloud infrastructure, web architecture, and systems management.","publisher":{"@id":"https://house603.com/#org"},"inLanguage":"en","blogPost":[
-{"@type":"BlogPosting","headline":"Will AI Take My Job? Why \"Someone Who Uses AI Will\" Is Only Half the Answer","url":"https://house603.com/technuggets/will-ai-take-my-job/","datePublished":"2026-10-22","author":{"@id":"https://house603.com/#omobolade"}},
-{"@type":"BlogPosting","headline":"A VPN Still Matters: Why It Won't Stop AI From Collecting Your Data","url":"https://house603.com/technuggets/vpn-wont-stop-ai-data-collection/","datePublished":"2026-10-21","author":{"@id":"https://house603.com/#omobolade"}},
-{"@type":"BlogPosting","headline":"The Always-Listening Watch: What Apple's Audio Intelligence Means Under GDPR","url":"https://house603.com/technuggets/apple-watch-always-listening-gdpr/","datePublished":"2026-09-21","author":{"@id":"https://house603.com/#omobolade"}},
-{"@type":"BlogPosting","headline":"Right-Sizing Cloud Compute: Cut 30 to 50% Off Your Bill Without Downtime","url":"https://house603.com/technuggets/cloud-right-sizing/","datePublished":"2026-08-12","author":{"@id":"https://house603.com/#omobolade"}},
-{"@type":"BlogPosting","headline":"Static-First Web Architecture: Ship Fast Sites That Survive Traffic Spikes","url":"https://house603.com/technuggets/static-first-architecture/","datePublished":"2026-08-26","author":{"@id":"https://house603.com/#omobolade"}},
-{"@type":"BlogPosting","headline":"The Zero-Downtime Deployment Checklist for Small Teams","url":"https://house603.com/technuggets/zero-downtime-deployment/","datePublished":"2026-09-09","author":{"@id":"https://house603.com/#omobolade"}}]},
+{"@type":"CollectionPage","@id":"https://house603.com/articles/#collection","name":"HOUSE603 Articles: Engineering Field Notes","url":"https://house603.com/articles/","description":"Practical, senior-level engineering field notes on cloud infrastructure, web architecture, and systems management, written by HOUSE603 practitioners.","publisher":{"@id":"https://house603.com/#org"},"inLanguage":"en","mainEntity":{"@type":"ItemList","itemListElement":[
+{"@type":"ListItem","position":1,"name":"Will AI Take My Job? Why \"Someone Who Uses AI Will\" Is Only Half the Answer","url":"https://house603.com/technuggets/will-ai-take-my-job/","datePublished":"2026-10-22","description":"Why the popular slogan misses the real story of industry retooling, workforce retraining, and the need to learn, unlearn, and relearn in real time."},
+{"@type":"ListItem","position":2,"name":"A VPN Still Matters: Why It Won't Stop AI From Collecting Your Data","url":"https://house603.com/technuggets/vpn-wont-stop-ai-data-collection/","datePublished":"2026-10-21","description":"A VPN encrypts your network connection and hides your IP, but AI collection happens inside your account and app. Here is how to handle both."},
+{"@type":"ListItem","position":3,"name":"The Always-Listening Watch: What Apple's Audio Intelligence Means Under GDPR","url":"https://house603.com/technuggets/apple-watch-always-listening-gdpr/","datePublished":"2026-09-21","description":"Apple's newest watches listen all day. Apple says no audio is stored, but under GDPR a transcript of a bystander is still their personal data."},
+{"@type":"ListItem","position":4,"name":"Right-Sizing Cloud Compute: Cut 30 to 50% Off Your Bill Without Downtime","url":"https://house603.com/technuggets/cloud-right-sizing/","datePublished":"2026-08-12","description":"A metrics-driven method for matching instance type and count to real demand, with AWS CLI, Terraform, and scheduling examples."},
+{"@type":"ListItem","position":5,"name":"Static-First Web Architecture: Ship Fast Sites That Survive Traffic Spikes","url":"https://house603.com/technuggets/static-first-architecture/","datePublished":"2026-08-26","description":"Pre-render, cache at the edge, and isolate the few endpoints that truly need a server. Cache-control, nginx, and SWR examples."},
+{"@type":"ListItem","position":6,"name":"The Zero-Downtime Deployment Checklist for Small Teams","url":"https://house603.com/technuggets/zero-downtime-deployment/","datePublished":"2026-09-09","description":"A rehearsable, reversible release process a two-person team can run in daylight. systemd, nginx, and CI examples."}]}},
+{"@type":"WebApplication","@id":"https://house603.com/articles/#tools","name":"HOUSE603 Infrastructure Cost Estimator","url":"https://house603.com/articles/#tools","description":"Free browser-based cloud footprint modeler and right-sizing headroom calculator for vCPU, RAM, block storage, and network egress.","applicationCategory":"BusinessApplication","operatingSystem":"All","browserRequirements":"Requires JavaScript. Requires HTML5.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},
+{"@type":"FAQPage","@id":"https://house603.com/articles/#faq","mainEntity":[
+{"@type":"Question","name":"What topics do HOUSE603 Articles cover?","acceptedAnswer":{"@type":"Answer","text":"HOUSE603 Articles provide senior engineering field notes on cloud infrastructure right-sizing, static-first web architecture, zero-downtime deployment pipelines, remote workforce AI retooling, and data protection under GDPR and ISO standards."}},
+{"@type":"Question","name":"Who writes and reviews the technical guides?","acceptedAnswer":{"@type":"Answer","text":"Guides are authored and reviewed by practicing software engineers and cybersecurity specialists at HOUSE603 holding credentials including ISO/IEC 27001 (Information Security) and ISO/IEC 27701 (Privacy Information Management)."}},
+{"@type":"Question","name":"How does the free Infrastructure Cost Estimator work?","acceptedAnswer":{"@type":"Answer","text":"The Infrastructure Cost Estimator models monthly on-demand compute, memory, storage, and egress pricing based on real-world multi-cloud benchmarks, showing right-sizing headroom of 30 to 50 percent directly in your browser without transmitting any personal data."}},
+{"@type":"Question","name":"How often are the articles updated?","acceptedAnswer":{"@type":"Answer","text":"Articles are maintained and updated as cloud provider instance pricing, regulatory frameworks (such as ISO 42001 and GDPR), and operational tooling change, with explicit last-modified timestamps on every guide."}}]},
 {"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://house603.com/"},{"@type":"ListItem","position":2,"name":"Articles","item":"https://house603.com/articles/"}]}]}</script>
 
 <script>

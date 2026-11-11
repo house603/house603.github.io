@@ -33,6 +33,51 @@ Cache-Control: public, max-age=31536000, immutable
 Cache-Control: public, max-age=0, s-maxage=600, stale-while-revalidate=86400</code></pre>
     <p>The <code>s-maxage</code> line tells the CDN to hold the page for ten minutes. The <code>stale-while-revalidate</code> line is the part people miss: for a full day after that, the edge is allowed to hand back the slightly stale page immediately while it fetches a fresh copy in the background. Readers never sit waiting on your origin, and your origin barely gets touched. The one tax you pay is cache invalidation, so when you need a change out now rather than in ten minutes, purge the specific paths through your CDN's API as the last step of the deploy.</p>
 
+    <div class="table-wrap">
+      <table class="article-table">
+        <caption>Edge Caching Directive &amp; TTL Blueprint Matrix</caption>
+        <thead>
+          <tr>
+            <th>Asset Classification</th>
+            <th>HTTP Cache-Control Header</th>
+            <th>Edge CDN TTL</th>
+            <th>Browser Cache</th>
+            <th>Invalidation Trigger</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Fingerprinted Assets</strong> (hashed JS, CSS, WOFF2)</td>
+            <td><code>public, max-age=31536000, immutable</code></td>
+            <td>1 Year</td>
+            <td>1 Year</td>
+            <td>Automatic upon filename hash revision</td>
+          </tr>
+          <tr>
+            <td><strong>HTML Entrypoints</strong> (landing, articles)</td>
+            <td><code>public, max-age=0, s-maxage=600, stale-while-revalidate=86400</code></td>
+            <td>10 Minutes (background refresh)</td>
+            <td>Revalidated immediately</td>
+            <td>Git push deployment or CDN purge API</td>
+          </tr>
+          <tr>
+            <td><strong>Dynamic Endpoints</strong> (forms, auth, telemetry)</td>
+            <td><code>no-store, no-cache, must-revalidate</code></td>
+            <td>0 Seconds (bypassed)</td>
+            <td>Never stored</td>
+            <td>Per-request live origin execution</td>
+          </tr>
+          <tr>
+            <td><strong>Security Headers</strong> (HSTS, CSP, nosniff)</td>
+            <td>Injected by reverse proxy at edge</td>
+            <td>Permanent</td>
+            <td>Cached via HSTS max-age</td>
+            <td>Server configuration update</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
     <h2>A minimal edge-friendly origin</h2>
     <p>Whatever sits behind the CDN should be boring and correct. An nginx origin for a static bundle is a dozen lines:</p>
     <pre><code>server {
@@ -73,8 +118,8 @@ Cache-Control: public, max-age=0, s-maxage=600, stale-while-revalidate=86400</co
   <div class="adslot" aria-hidden="true"><span class="ad-label">Advertisement</span><ins class="adsbygoogle" style="display:block" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
 
   <div class="related"><div class="r-label">Keep reading</div><div class="rcards">
-    <a class="glass rcard" href="../../technuggets/cloud-right-sizing/"><span class="rc-cat">Cloud Infrastructure</span><h4>Right-Sizing Cloud Compute: Cut 30 to 50% Off Your Bill Without Downtime</h4></a>
-    <a class="glass rcard" href="../../technuggets/zero-downtime-deployment/"><span class="rc-cat">Systems Management</span><h4>The Zero-Downtime Deployment Checklist for Small Teams</h4></a>
+    <a class="glass rcard" href="../../technuggets/cloud-right-sizing/index.html"><span class="rc-cat">Cloud Infrastructure</span><h4>Right-Sizing Cloud Compute: Cut 30 to 50% Off Your Bill Without Downtime</h4></a>
+    <a class="glass rcard" href="../../technuggets/zero-downtime-deployment/index.html"><span class="rc-cat">Systems Management</span><h4>The Zero-Downtime Deployment Checklist for Small Teams</h4></a>
   </div></div>
 </article></div></main>
 
@@ -84,8 +129,10 @@ Cache-Control: public, max-age=0, s-maxage=600, stale-while-revalidate=86400</co
 
 <div class="consent" id="consent" role="dialog" aria-label="Cookie consent"><div class="glass consent-card"><p>We use cookies to run Google AdSense advertising, which keeps our articles free. With your consent, ads may be personalised. You can withdraw consent anytime via the <a href="../../privacy/index.html" style="color:var(--cream)">Privacy page</a>.</p><div class="consent-row"><button class="btn btn-primary" id="c-accept">Accept all</button><button class="btn" id="c-ess">Non-personalised only</button><button class="btn" id="c-rej">Reject</button></div></div></div>
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Static-First Web Architecture: Ship Fast Sites That Survive Traffic Spikes","description":"How to pre-render, cache at the edge, and isolate the few endpoints that truly need a server.","image":"https://house603.com/og-image.png","datePublished":"2026-08-26","dateModified":"2026-09-16","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https://house603.com/technuggets/static-first-architecture/"},"author":{"@type":"Person","name":"Omobolade Odeniyi","jobTitle":"Lead Contributor","hasCredential":["ISO/IEC 27001","ISO/IEC 27701"]},"publisher":{"@type":"Organization","name":"HOUSE603 Ventures","logo":{"@type":"ImageObject","url":"https://house603.com/apple-touch-icon.png"}}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Static-First Web Architecture: Ship Fast Sites That Survive Traffic Spikes","description":"How to pre-render, cache at the edge, and isolate the few endpoints that truly need a server.","image":"https://house603.com/og-image.png","datePublished":"2026-08-26","dateModified":"2026-11-11","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https://house603.com/technuggets/static-first-architecture/"},"speakable":{"@type":"SpeakableSpecification","cssSelector":[".quick-answer p"]},"about":[{"@type":"Thing","name":"Static web page","sameAs":"https://en.wikipedia.org/wiki/Static_web_page"},{"@type":"Thing","name":"Content delivery network","sameAs":"https://en.wikipedia.org/wiki/Content_delivery_network"}],"mentions":[{"@type":"Thing","name":"Nginx","sameAs":"https://en.wikipedia.org/wiki/Nginx"},{"@type":"Thing","name":"Web performance","sameAs":"https://en.wikipedia.org/wiki/Web_performance"}],"author":{"@type":"Person","name":"Omobolade Odeniyi","jobTitle":"Lead Contributor","hasCredential":["ISO/IEC 27001","ISO/IEC 27701"]},"publisher":{"@type":"Organization","name":"HOUSE603 Ventures","logo":{"@type":"ImageObject","url":"https://house603.com/apple-touch-icon.png"}}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to Build a Static-First Web Architecture","description":"A step-by-step architectural guide to pre-rendering HTML, configuring edge Cache-Control, and isolating dynamic APIs.","step":[{"@type":"HowToStep","position":1,"name":"Pre-render content to static HTML","text":"Compile all pages, templates, and text assets into static HTML and versioned static files at build time."},{"@type":"HowToStep","position":2,"name":"Configure aggressive edge caching","text":"Set immutable 1-year headers on fingerprinted assets and 10-minute s-maxage with stale-while-revalidate on HTML entrypoints."},{"@type":"HowToStep","position":3,"name":"Deploy a minimal reverse proxy origin","text":"Host static files behind a minimal Nginx or object storage origin configured to return security headers by default."},{"@type":"HowToStep","position":4,"name":"Isolate dynamic API endpoints","text":"Route stateful interactions to dedicated /api/ microservices that scale independently without impacting edge-cached page delivery."}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is static-first web architecture?","acceptedAnswer":{"@type":"Answer","text":"Static-first architecture renders web pages into plain HTML at build time, serves them directly from CDN edge servers close to readers, and isolates dynamic APIs so traffic spikes never exhaust backend origin servers."}},{"@type":"Question","name":"How does stale-while-revalidate prevent traffic spikes from breaking sites?","acceptedAnswer":{"@type":"Answer","text":"The stale-while-revalidate directive instructs CDN edge nodes to serve cached pages instantly to users while refreshing the origin copy asynchronously in the background, keeping response times under 20ms."}},{"@type":"Question","name":"How do static-first architectures handle dynamic user data?","acceptedAnswer":{"@type":"Answer","text":"Dynamic data such as form submissions, authenticated sessions, or search queries are isolated under distinct endpoints (such as /api/) that scale independently, ensuring static page availability is never compromised by backend database load."}}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://house603.com/"},{"@type":"ListItem","position":2,"name":"Articles","item":"https://house603.com/articles/"},{"@type":"ListItem","position":3,"name":"Static-First Web Architecture","item":"https://house603.com/technuggets/static-first-architecture/"}]}</script>
 
-<script src="/article-page.js?v=1"></script>
+<script src="../../article-page.js?v=1"></script>
 </body></html>

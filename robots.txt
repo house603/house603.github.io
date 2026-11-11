@@ -17,4 +17,15 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+# Sitemaps and AI Context Manifest
 Sitemap: https://house603.com/sitemap.xml
+# LLM Manifest: https://house603.com/llms.txt
