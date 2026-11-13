@@ -60,53 +60,65 @@
     <p>This is the paradox of hyperscale cloud computing. The architecture is designed to distribute workloads, improve availability and eliminate dependence on individual physical machines. Yet the complexity and interconnectedness of the resulting ecosystem can create dependencies whose failure has consequences far beyond the original point of failure.</p>
 
     <figure>
-      <svg viewBox="0 0 680 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram contrasting a monolithic single-vendor cloud dependency with a decoupled sovereign continuity architecture.">
+      <svg viewBox="0 0 820 456" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Architecture diagram comparing a concentrated single-provider cloud dependency against a decoupled sovereign continuity model with out-of-band resilience.">
         <style>
           .d-t{font-family:'Hanken Grotesk',system-ui,sans-serif;fill:#F3EEE4}
           .d-s{font-family:'Hanken Grotesk',system-ui,sans-serif;fill:#C7BFB1}
-          .d-m{font-family:'JetBrains Mono',ui-monospace,monospace;fill:#8B8375;letter-spacing:1.5px}
-          .d-r{font-family:'JetBrains Mono',ui-monospace,monospace;fill:#EE6E1E;letter-spacing:1.5px}
-          .d-g{font-family:'JetBrains Mono',ui-monospace,monospace;fill:#9fd39f;letter-spacing:1.5px}
+          .d-m{font-family:'JetBrains Mono',ui-monospace,monospace;fill:#8B8375;letter-spacing:0.5px}
+          .d-r{font-family:'JetBrains Mono',ui-monospace,monospace;fill:#EE6E1E;letter-spacing:0.8px}
+          .d-g{font-family:'JetBrains Mono',ui-monospace,monospace;fill:#9fd39f;letter-spacing:0.8px}
         </style>
-        <rect width="680" height="400" rx="16" fill="#141210" stroke="#252321" stroke-width="1.5"/>
+        <rect width="820" height="456" rx="16" fill="#141210" stroke="#252321" stroke-width="1.5"/>
         
-        <rect x="30" y="30" width="295" height="340" rx="12" fill="#1A1816" stroke="rgba(232,25,31,0.3)" stroke-width="1.5"/>
-        <text class="d-r" x="48" y="58" font-size="10.5" font-weight="700">CONCENTRATED CLOUD STACK (FRAGILE)</text>
-        <text class="d-s" x="48" y="80" font-size="12">Single Provider Control Plane</text>
+        <!-- Column 1: Fragile Single Provider -->
+        <rect x="24" y="24" width="374" height="408" rx="12" fill="#1A1816" stroke="rgba(232,25,31,0.32)" stroke-width="1.5"/>
+        <text class="d-r" x="42" y="52" font-size="10.5" font-weight="700">CONCENTRATED CLOUD STACK (FRAGILE)</text>
+        <text class="d-s" x="42" y="72" font-size="12">Single Provider Control Plane &amp; Shared Dependencies</text>
         
-        <rect x="48" y="100" width="259" height="42" rx="8" fill="#221E1C" stroke="#382C2A"/>
-        <text class="d-t" x="62" y="126" font-size="13" font-weight="600">Primary Identity (Entra ID / SSO)</text>
+        <rect x="42" y="92" width="338" height="52" rx="8" fill="#221E1C" stroke="#382C2A"/>
+        <text class="d-t" x="56" y="114" font-size="12.5" font-weight="600">Primary Identity &amp; Directory</text>
+        <text class="d-m" x="56" y="132" font-size="10.5">Entra ID / SSO (Single failure domain)</text>
         
-        <rect x="48" y="152" width="259" height="42" rx="8" fill="#221E1C" stroke="#382C2A"/>
-        <text class="d-t" x="62" y="178" font-size="13" font-weight="600">Enterprise Mail &amp; Chat (Exchange / Teams)</text>
+        <rect x="42" y="156" width="338" height="52" rx="8" fill="#221E1C" stroke="#382C2A"/>
+        <text class="d-t" x="56" y="178" font-size="12.5" font-weight="600">Enterprise Mail &amp; Team Chat</text>
+        <text class="d-m" x="56" y="196" font-size="10.5">Exchange Online &amp; Microsoft Teams</text>
         
-        <rect x="48" y="204" width="259" height="42" rx="8" fill="#221E1C" stroke="#382C2A"/>
-        <text class="d-t" x="62" y="230" font-size="13" font-weight="600">Cloud Storage &amp; Workspaces (SharePoint)</text>
+        <rect x="42" y="220" width="338" height="52" rx="8" fill="#221E1C" stroke="#382C2A"/>
+        <text class="d-t" x="56" y="242" font-size="12.5" font-weight="600">Cloud Storage &amp; Documents</text>
+        <text class="d-m" x="56" y="260" font-size="10.5">SharePoint &amp; OneDrive Shared Tenancy</text>
         
-        <rect x="48" y="256" width="259" height="42" rx="8" fill="#221E1C" stroke="#382C2A"/>
-        <text class="d-t" x="62" y="282" font-size="13" font-weight="600">Admin Portals &amp; Security Tools (Azure)</text>
+        <rect x="42" y="284" width="338" height="52" rx="8" fill="#221E1C" stroke="#382C2A"/>
+        <text class="d-t" x="56" y="306" font-size="12.5" font-weight="600">Admin Portals &amp; Security Tools</text>
+        <text class="d-m" x="56" y="324" font-size="10.5">Azure Portal, Sentinel &amp; Defender XDR</text>
 
-        <rect x="48" y="310" width="259" height="44" rx="8" fill="rgba(232,25,31,0.12)" stroke="rgba(232,25,31,0.4)"/>
-        <text class="d-r" x="62" y="337" font-size="11.5" font-weight="700">Health Check Flap: Total Lockout</text>
+        <rect x="42" y="348" width="338" height="60" rx="8" fill="rgba(232,25,31,0.12)" stroke="rgba(232,25,31,0.45)"/>
+        <text class="d-r" x="56" y="372" font-size="12" font-weight="700">Health-Check Loop &amp; Cascading Failure</text>
+        <text class="d-s" x="56" y="392" font-size="11.5">Full administrative lockout; business ops stall</text>
 
-        <rect x="355" y="30" width="295" height="340" rx="12" fill="#1A1816" stroke="rgba(238,110,30,0.3)" stroke-width="1.5"/>
-        <text class="d-g" x="373" y="58" font-size="10.5" font-weight="700">SOVEREIGN CONTINUITY (RESILIENT)</text>
-        <text class="d-s" x="373" y="80" font-size="12">Decoupled Operational Redundancy</text>
+        <!-- Column 2: Sovereign Continuity -->
+        <rect x="422" y="24" width="374" height="408" rx="12" fill="#1A1816" stroke="rgba(159,211,159,0.32)" stroke-width="1.5"/>
+        <text class="d-g" x="440" y="52" font-size="10.5" font-weight="700">SOVEREIGN CONTINUITY (RESILIENT)</text>
+        <text class="d-s" x="440" y="72" font-size="12">Decoupled Operational Redundancy &amp; Out-of-Band Access</text>
 
-        <rect x="373" y="100" width="259" height="42" rx="8" fill="#1E221E" stroke="#2B3A2B"/>
-        <text class="d-t" x="387" y="126" font-size="13" font-weight="600">Decoupled Vaults (NordPass Break-Glass)</text>
+        <rect x="440" y="92" width="338" height="52" rx="8" fill="#1E221E" stroke="#2B3A2B"/>
+        <text class="d-t" x="454" y="114" font-size="12.5" font-weight="600">Decoupled Credential Sovereignty</text>
+        <text class="d-m" x="454" y="132" font-size="10.5">NordPass zero-knowledge break-glass vault</text>
 
-        <rect x="373" y="152" width="259" height="42" rx="8" fill="#1E221E" stroke="#2B3A2B"/>
-        <text class="d-t" x="387" y="178" font-size="13" font-weight="600">Out-of-Band WireGuard (NordVPN Meshnet)</text>
+        <rect x="440" y="156" width="338" height="52" rx="8" fill="#1E221E" stroke="#2B3A2B"/>
+        <text class="d-t" x="454" y="178" font-size="12.5" font-weight="600">Out-of-Band Administrative Transit</text>
+        <text class="d-m" x="454" y="196" font-size="10.5">NordVPN WireGuard meshnet overlay</text>
 
-        <rect x="373" y="204" width="259" height="42" rx="8" fill="#1E221E" stroke="#2B3A2B"/>
-        <text class="d-t" x="387" y="230" font-size="13" font-weight="600">Immutable Multi-Cloud &amp; Offline Backups</text>
+        <rect x="440" y="220" width="338" height="52" rx="8" fill="#1E221E" stroke="#2B3A2B"/>
+        <text class="d-t" x="454" y="242" font-size="12.5" font-weight="600">Immutable Multi-Cloud Backups</text>
+        <text class="d-m" x="454" y="260" font-size="10.5">Cross-provider air-gapped snapshots</text>
 
-        <rect x="373" y="256" width="259" height="42" rx="8" fill="#1E221E" stroke="#2B3A2B"/>
-        <text class="d-t" x="387" y="282" font-size="13" font-weight="600">Independent Secondary Cloud Recovery</text>
+        <rect x="440" y="284" width="338" height="52" rx="8" fill="#1E221E" stroke="#2B3A2B"/>
+        <text class="d-t" x="454" y="306" font-size="12.5" font-weight="600">Independent Secondary Recovery</text>
+        <text class="d-m" x="454" y="324" font-size="10.5">Multi-cloud failover &amp; offline comms</text>
 
-        <rect x="373" y="310" width="259" height="44" rx="8" fill="rgba(159,211,159,0.12)" stroke="rgba(159,211,159,0.3)"/>
-        <text class="d-g" x="387" y="337" font-size="11.5" font-weight="700">Primary Outage: Operations Survive</text>
+        <rect x="440" y="348" width="338" height="60" rx="8" fill="rgba(159,211,159,0.12)" stroke="rgba(159,211,159,0.4)"/>
+        <text class="d-g" x="454" y="372" font-size="12" font-weight="700">Primary Cloud Outage Resisted</text>
+        <text class="d-s" x="454" y="392" font-size="11.5">Engineers retain access, data, and communications</text>
       </svg>
       <figcaption>Architecture comparison: Monolithic single-vendor concentration versus decoupled out-of-band operational sovereignty.</figcaption>
     </figure>
