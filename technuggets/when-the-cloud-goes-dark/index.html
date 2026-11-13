@@ -35,10 +35,16 @@
 
   <div class="article-body">
     <p>There is something profoundly unsettling about waking up to discover that the digital infrastructure upon which much of the modern world depends has suddenly become unavailable.</p>
+
     <p>Emails stop arriving. Meetings disappear. Business transactions stall. Government departments struggle to communicate. Applications that ordinarily seem indispensable become little more than decorative icons on computer screens.</p>
+
     <p>This is not a hypothetical scenario. It is precisely the disruption millions of users and organisations have experienced during Microsoft's latest global cloud service outage.</p>
+
     <p>On 12 November 2026, Microsoft experienced a major disruption affecting its Microsoft 365 ecosystem, particularly Outlook and Exchange Online. Teams, SharePoint, Copilot and several other connected services also experienced varying degrees of disruption. The incident persisted into the following day, affecting businesses, government institutions and other organisations across multiple continents.</p>
-    <p>At its peak, Downdetector recorded more than 130,000 reports of Outlook-related problems in the United States alone. The consequences extended beyond inconvenienced office workers. Government agencies, financial institutions, airlines, healthcare organisations and businesses reported operational difficulties. Some organisations resorted to alternative communication arrangements, while others experienced delays in critical business processes.</p>
+
+    <p>At its peak, Downdetector recorded more than 130,000 reports of Outlook-related problems in the United States alone. The consequences extended beyond inconvenienced office workers. Government agencies, financial institutions, airlines, healthcare organisations and businesses reported operational difficulties.</p>
+
+    <p>Some organisations resorted to alternative communication arrangements, while others experienced delays in critical business processes.</p>
 
     <figure>
       <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&amp;fit=crop&amp;w=1280&amp;q=70" alt="Rows of dark illuminated enterprise server racks in a modern cloud datacenter corridor." loading="lazy" width="1280" height="853">
@@ -47,16 +53,38 @@
 
     <div class="adslot adslot--rect" aria-hidden="true"><span class="ad-label">Advertisement</span><ins class="adsbygoogle" style="display:block" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
 
-    <p>Microsoft attributed the disruption to server availability and infrastructure problems. Its investigation indicated that servers were unexpectedly failing automated health checks and being removed from service, placing additional pressure on the remaining operational infrastructure. The company subsequently worked on alternative health-check mechanisms and infrastructure recovery. Microsoft also stated that it had no indication that malicious activity was responsible.</p>
+    <p>Microsoft attributed the disruption to server availability and infrastructure problems. Its investigation indicated that servers were unexpectedly failing automated health checks and being removed from service, placing additional pressure on the remaining operational infrastructure. The company subsequently worked on alternative health-check mechanisms and infrastructure recovery.</p>
+
+    <p>Microsoft also stated that it had no indication that malicious activity was responsible.</p>
+
     <p>These are important details. However, they do not answer every question.</p>
+
     <p>And perhaps the most important question is not simply why Microsoft's infrastructure failed, but why the failure of a single technology provider can have such far-reaching consequences for organisations around the world.</p>
 
     <h2>We Have Been Here Before: AWS and Google Cloud</h2>
+
     <p>Microsoft is certainly not the first hyperscale cloud provider to experience a major service disruption. In fact, recent history suggests that the problem is not exclusive to any particular provider.</p>
-    <p>In October 2025, Amazon Web Services (AWS) experienced a significant outage affecting its US-East-1 region in Northern Virginia. The incident began with a defect in the automated DNS management system responsible for resolving DynamoDB service endpoints. What followed was a cascading series of infrastructure failures affecting services that depended on DynamoDB, including aspects of EC2, Network Load Balancers, Lambda and CloudWatch. The disruption lasted approximately 15 hours before AWS restored normal operations.</p>
+
+    <p>In October 2025, Amazon Web Services (AWS) experienced a significant outage affecting its US-East-1 region in Northern Virginia.</p>
+
+    <p>The incident began with a defect in the automated DNS management system responsible for resolving DynamoDB service endpoints. What followed was a cascading series of infrastructure failures affecting services that depended on DynamoDB, including aspects of EC2, Network Load Balancers, Lambda and CloudWatch.</p>
+
+    <p>The disruption lasted approximately 15 hours before AWS restored normal operations.</p>
+
     <p>The significance of this incident was not simply that a database service had failed. It was that a relatively specific infrastructure defect propagated through interconnected services, demonstrating how dependencies within a sophisticated cloud ecosystem can amplify relatively isolated technical failures.</p>
-    <p>Google Cloud experienced a similarly consequential disruption on 12 June 2025. Multiple Google Cloud, Google Workspace and Google Security Operations services experienced elevated error rates across numerous geographical regions. Google's subsequent incident report identified an incorrect change to its API management and control-plane infrastructure as the underlying problem. More specifically, the failure involved Google's Service Control infrastructure, which handles important API authorisation, policy and quota checks. The incident lasted approximately seven hours.</p>
-    <p>These incidents share an important characteristic: none required the complete destruction of a data centre or the simultaneous failure of an entire geographical region to produce widespread disruption. A failure in a relatively small but strategically important component was sufficient to affect numerous interconnected services.</p>
+
+    <p>Google Cloud experienced a similarly consequential disruption on 12 June 2025.</p>
+
+    <p>Multiple Google Cloud, Google Workspace and Google Security Operations services experienced elevated error rates across numerous geographical regions. Google's subsequent incident report identified an incorrect change to its API management and control-plane infrastructure as the underlying problem.</p>
+
+    <p>More specifically, the failure involved Google's Service Control infrastructure, which handles important API authorisation, policy and quota checks.</p>
+
+    <p>The incident lasted approximately seven hours.</p>
+
+    <p>These incidents share an important characteristic: none required the complete destruction of a data centre or the simultaneous failure of an entire geographical region to produce widespread disruption.</p>
+
+    <p>A failure in a relatively small but strategically important component was sufficient to affect numerous interconnected services.</p>
+
     <p>This is the paradox of hyperscale cloud computing. The architecture is designed to distribute workloads, improve availability and eliminate dependence on individual physical machines. Yet the complexity and interconnectedness of the resulting ecosystem can create dependencies whose failure has consequences far beyond the original point of failure.</p>
 
     <figure>
@@ -124,90 +152,210 @@
     </figure>
 
     <h2>What Exactly Is Happening Inside the Cloud?</h2>
+
     <p>Cloud infrastructure is extraordinarily complex.</p>
-    <p>Behind the apparently simple experience of opening an email application or accessing a business document are layers of interconnected systems responsible for identity management, authentication, networking, storage, workload orchestration, databases, security monitoring and application delivery. These systems depend on one another. Consequently, the failure of a seemingly peripheral component can have disproportionate consequences.</p>
+
+    <p>Behind the apparently simple experience of opening an email application or accessing a business document are layers of interconnected systems responsible for identity management, authentication, networking, storage, workload orchestration, databases, security monitoring and application delivery.</p>
+
+    <p>These systems depend on one another.</p>
+
+    <p>Consequently, the failure of a seemingly peripheral component can have disproportionate consequences.</p>
+
     <p>This brings us to an uncomfortable consideration surrounding the latest Microsoft incident.</p>
-    <p>Microsoft has stated that it has no indication of malicious activity. That statement should be taken seriously, and there is currently no verified evidence establishing that the outage resulted from a cyberattack. Nevertheless, the absence of publicly identified malicious activity is not the same thing as a complete, independently verifiable explanation of an incident.</p>
+
+    <p>Microsoft has stated that it has no indication of malicious activity. That statement should be taken seriously, and there is currently no verified evidence establishing that the outage resulted from a cyberattack.</p>
+
+    <p>Nevertheless, the absence of publicly identified malicious activity is not the same thing as a complete, independently verifiable explanation of an incident.</p>
+
     <p>Until a sufficiently detailed technical post-incident report becomes available, several possibilities remain worth considering:</p>
+
     <ul>
       <li>Could the incident have resulted from an unusually complicated software or configuration failure?</li>
       <li>Could an undiscovered vulnerability or infrastructure-level exploit have contributed to the disruption?</li>
       <li>Could a compromise of an automated management component have produced consequences resembling an ordinary infrastructure malfunction?</li>
       <li>And, considering the increasing integration of artificial intelligence into enterprise infrastructure, what role might autonomous systems and AI-assisted operational tools eventually play in incidents of this nature?</li>
     </ul>
+
     <p>These are questions, not allegations.</p>
+
     <p>There is presently no credible evidence that Microsoft's outage was caused by a rogue AI system, an autonomous agent acting outside its intended permissions, or a sophisticated cyberattack. Equally, there is no justification for suggesting that Microsoft is deliberately concealing such an event.</p>
+
     <p>However, dismissing these possibilities as subjects unworthy of examination would be equally unwise.</p>
-    <p>Modern cloud environments increasingly incorporate automation, predictive maintenance, AI-assisted monitoring and increasingly autonomous operational agents. These technologies introduce additional layers of complexity, privilege and interdependence. An incorrectly configured automation routine, an erroneous AI-generated operational recommendation or an inadequately controlled autonomous agent could potentially cause significant disruption if granted inappropriate access to critical infrastructure.</p>
-    <p>The cybersecurity industry must therefore think beyond conventional questions about malware, ransomware and unauthorised access. We must also examine the security implications of increasingly autonomous infrastructure management: Who authorises these systems to make changes? What safeguards prevent cascading errors? Can their actions be independently audited? Are there reliable mechanisms for stopping an automated process before it causes widespread damage?</p>
+
+    <p>Modern cloud environments increasingly incorporate automation, predictive maintenance, AI-assisted monitoring and increasingly autonomous operational agents. These technologies introduce additional layers of complexity, privilege and interdependence.</p>
+
+    <p>An incorrectly configured automation routine, an erroneous AI-generated operational recommendation or an inadequately controlled autonomous agent could potentially cause significant disruption if granted inappropriate access to critical infrastructure.</p>
+
+    <p>The cybersecurity industry must therefore think beyond conventional questions about malware, ransomware and unauthorised access.</p>
+
+    <p>We must also examine the security implications of increasingly autonomous infrastructure management.</p>
+
+    <p>Who authorises these systems to make changes? What safeguards prevent cascading errors? Can their actions be independently audited? Are there reliable mechanisms for stopping an automated process before it causes widespread damage?</p>
+
     <p>These questions will become increasingly important as organisations delegate more operational authority to AI-driven systems.</p>
 
     <h2>The Bigger Problem: We Are Centralising Our Digital Existence</h2>
+
     <p>Perhaps the most significant lesson from these incidents is the growing concentration of global digital infrastructure in the hands of a relatively small number of technology providers.</p>
+
     <p>Microsoft, Amazon and Google collectively provide an enormous proportion of the cloud infrastructure, productivity tools and digital services upon which modern organisations depend.</p>
-    <p>For businesses, the attraction is understandable. Cloud computing offers scalability, predictable operating expenditure, geographically distributed infrastructure, sophisticated security capabilities and access to computing resources that would otherwise require substantial capital investment. For many organisations, moving to the cloud is not merely a technological preference: it is a strategic business decision.</p>
+
+    <p>For businesses, the attraction is understandable.</p>
+
+    <p>Cloud computing offers scalability, predictable operating expenditure, geographically distributed infrastructure, sophisticated security capabilities and access to computing resources that would otherwise require substantial capital investment.</p>
+
+    <p>For many organisations, moving to the cloud is not merely a technological preference: it is a strategic business decision.</p>
+
     <p>However, convenience can gradually become dependency.</p>
-    <p>An organisation might host its applications on Azure, maintain its communications through Microsoft 365, store its documents in SharePoint and OneDrive, manage employee identities through Microsoft Entra ID and operate security monitoring through Microsoft's extended detection and response ecosystem. Each decision may be perfectly reasonable in isolation.</p>
-    <p>But what happens when several of these services become unavailable simultaneously? The organisation may discover that its email, collaboration, identity management, security monitoring and administrative capabilities are all exposed to a common point of failure.</p>
-    <p>This is particularly concerning when the same provider supplies multiple layers of an organisation's technology stack. The problem is not necessarily that cloud computing is inherently unreliable. It is that organisations sometimes mistake the resilience of an individual cloud service for the resilience of their entire business. They are not the same thing.</p>
+
+    <p>An organisation might host its applications on Azure, maintain its communications through Microsoft 365, store its documents in SharePoint and OneDrive, manage employee identities through Microsoft Entra ID and operate security monitoring through Microsoft's extended detection and response ecosystem.</p>
+
+    <p>Each decision may be perfectly reasonable in isolation.</p>
+
+    <p>But what happens when several of these services become unavailable simultaneously?</p>
+
+    <p>The organisation may discover that its email, collaboration, identity management, security monitoring and administrative capabilities are all exposed to a common point of failure.</p>
+
+    <p>This is particularly concerning when the same provider supplies multiple layers of an organisation's technology stack.</p>
+
+    <p>The problem is not necessarily that cloud computing is inherently unreliable. It is that organisations sometimes mistake the resilience of an individual cloud service for the resilience of their entire business.</p>
+
+    <p>They are not the same thing.</p>
 
     <div class="table-wrap">
       <table class="article-table">
         <caption>Architectural Continuity Matrix: Single-Stack Cloud vs. Resilient Operations</caption>
         <thead>
           <tr>
-            <th>Continuity Domain</th>
-            <th>Concentrated Single-Stack Model</th>
-            <th>Sovereign Architecture Model</th>
-            <th>Practical Engineering Control</th>
+            <th scope="col">Continuity Domain</th>
+            <th scope="col">Concentrated Single-Stack Model</th>
+            <th scope="col">Sovereign Architecture Model</th>
+            <th scope="col">Practical Engineering Control</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td><strong>User &amp; Admin Identity</strong></td>
-            <td>Bound entirely to Microsoft Entra ID / Okta</td>
-            <td>Decoupled emergency break-glass vaults</td>
-            <td>Store secondary recovery keys and emergency credentials in an isolated zero-knowledge vault like <a href="https://go.nordpass.io/aff_c?offer_id=488&amp;aff_id=159119&amp;url_id=9356" target="_blank" rel="sponsored noopener">NordPass</a></td>
+            <td>
+              <span class="cell-title">Identity &amp; Directory</span>
+              <span class="cell-desc">Administrative authentication</span>
+            </td>
+            <td>
+              <span class="cell-title">Single Provider SSO</span>
+              <span class="cell-desc">Bound 100% to Entra ID or Okta</span>
+            </td>
+            <td>
+              <span class="cell-title">Decoupled Vaults</span>
+              <span class="cell-desc">Zero-knowledge offline credentials</span>
+            </td>
+            <td>
+              <span class="cell-title">Break-Glass Protocol</span>
+              <span class="cell-desc">Store emergency recovery keys in an isolated vault via <a href="https://go.nordpass.io/aff_c?offer_id=488&amp;aff_id=159119&amp;url_id=9356" target="_blank" rel="sponsored noopener">NordPass</a></span>
+            </td>
           </tr>
           <tr>
-            <td><strong>Administrative Transit</strong></td>
-            <td>Traverses public corporate VPN / central ingress</td>
-            <td>Point-to-point encrypted mesh overlay</td>
-            <td>Route emergency out-of-band admin access over WireGuard tunnels via <a href="https://go.nordvpn.net/aff_c?offer_id=15&amp;aff_id=159119&amp;url_id=902" target="_blank" rel="sponsored noopener">NordVPN Meshnet</a></td>
+            <td>
+              <span class="cell-title">Network Transit</span>
+              <span class="cell-desc">Out-of-band management</span>
+            </td>
+            <td>
+              <span class="cell-title">Central Ingress Proxy</span>
+              <span class="cell-desc">Public corporate gateway / cloud ingress</span>
+            </td>
+            <td>
+              <span class="cell-title">Encrypted Mesh Overlay</span>
+              <span class="cell-desc">Point-to-point WireGuard routing</span>
+            </td>
+            <td>
+              <span class="cell-title">Isolated Jump Boxes</span>
+              <span class="cell-desc">Connect directly to secondary hosts using <a href="https://go.nordvpn.net/aff_c?offer_id=15&amp;aff_id=159119&amp;url_id=902" target="_blank" rel="sponsored noopener">NordVPN Meshnet</a></span>
+            </td>
           </tr>
           <tr>
-            <td><strong>Corporate Messaging</strong></td>
-            <td>100% Exchange Online and Microsoft Teams</td>
-            <td>Contracted out-of-band secondary communications</td>
-            <td>Maintain segregated, verified backup communications completely isolated from primary cloud tenant</td>
+            <td>
+              <span class="cell-title">Operational Messaging</span>
+              <span class="cell-desc">Incident coordination</span>
+            </td>
+            <td>
+              <span class="cell-title">Monolithic Suite</span>
+              <span class="cell-desc">100% Exchange Online &amp; Teams</span>
+            </td>
+            <td>
+              <span class="cell-title">Segregated Backups</span>
+              <span class="cell-desc">Independent secondary channel</span>
+            </td>
+            <td>
+              <span class="cell-title">Out-of-Band Channel</span>
+              <span class="cell-desc">Maintain pre-provisioned emergency communications outside the tenant</span>
+            </td>
           </tr>
           <tr>
-            <td><strong>Critical Data Backups</strong></td>
-            <td>Hosted inside same tenant / same cloud region</td>
-            <td>Cross-cloud, immutable, and offline snapshots</td>
-            <td>Enforce automated air-gapped snapshots with separate encryption keys and credentials</td>
+            <td>
+              <span class="cell-title">Data Storage &amp; State</span>
+              <span class="cell-desc">Tenant snapshots</span>
+            </td>
+            <td>
+              <span class="cell-title">Same-Cloud Replication</span>
+              <span class="cell-desc">Stored in same tenant / shared region</span>
+            </td>
+            <td>
+              <span class="cell-title">Multi-Cloud Snapshots</span>
+              <span class="cell-desc">Cross-provider immutable storage</span>
+            </td>
+            <td>
+              <span class="cell-title">Air-Gapped Offline Copies</span>
+              <span class="cell-desc">Automate independent encrypted snapshots with separated root credentials</span>
+            </td>
           </tr>
         </tbody>
       </table>
     </div>
 
     <h2>A More Uncomfortable Scenario: What If the Cloud Is Physically Attacked?</h2>
+
     <p>There is another dimension to cloud dependency that deserves serious consideration.</p>
-    <p>Cloud computing may appear intangible, but the cloud is ultimately physical infrastructure. It consists of enormous data centres, electricity substations, cooling systems, fibre-optic networks, telecommunications infrastructure, backup generators and sophisticated physical security installations. These facilities are increasingly strategic assets.</p>
-    <p>As governments and businesses digitise essential services, data centres become increasingly important to national economic activity, financial systems, communications, defence infrastructure and public administration. This naturally raises questions about their vulnerability during geopolitical conflicts.</p>
-    <p>Historically, electricity infrastructure, telecommunications facilities, transportation networks and other critical utilities have been recognised as strategically important infrastructure during armed conflicts. Large data centres could similarly become attractive strategic targets because of the concentration of digital services and information they support.</p>
-    <p>Consider a hypothetical scenario in which a major geopolitical conflict results in the physical destruction or prolonged incapacitation of a strategically important data centre. The consequences could extend far beyond the immediate geographical location. Depending on the provider's architecture, geographical distribution, replication arrangements and recovery capabilities, organisations could experience disruptions to financial services, communications, healthcare systems, government operations and other essential activities.</p>
+
+    <p>Cloud computing may appear intangible, but the cloud is ultimately physical infrastructure.</p>
+
+    <p>It consists of enormous data centres, electricity substations, cooling systems, fibre-optic networks, telecommunications infrastructure, backup generators and sophisticated physical security installations. These facilities are increasingly strategic assets.</p>
+
+    <p>As governments and businesses digitise essential services, data centres become increasingly important to national economic activity, financial systems, communications, defence infrastructure and public administration.</p>
+
+    <p>This naturally raises questions about their vulnerability during geopolitical conflicts.</p>
+
+    <p>Historically, electricity infrastructure, telecommunications facilities, transportation networks and other critical utilities have been recognised as strategically important infrastructure during armed conflicts.</p>
+
+    <p>Large data centres could similarly become attractive strategic targets because of the concentration of digital services and information they support.</p>
+
+    <p>Consider a hypothetical scenario in which a major geopolitical conflict results in the physical destruction or prolonged incapacitation of a strategically important data centre.</p>
+
+    <p>The consequences could extend far beyond the immediate geographical location.</p>
+
+    <p>Depending on the provider's architecture, geographical distribution, replication arrangements and recovery capabilities, organisations could experience disruptions to financial services, communications, healthcare systems, government operations and other essential activities.</p>
+
     <p>A sufficiently coordinated attack against telecommunications infrastructure, electricity supplies and multiple data-centre facilities could produce even more severe consequences.</p>
-    <p>This is not a prediction that data centres will inevitably become primary bombing targets. Nor does it suggest that cloud providers have failed to account for physical security threats. Rather, it highlights an important reality: digital infrastructure is part of physical national infrastructure, and its protection must be considered accordingly.</p>
-    <p>The assumption that geographical redundancy automatically guarantees continuity also deserves scrutiny. If supposedly independent systems share telecommunications routes, electricity dependencies, identity services or administrative control planes, their resilience may be considerably weaker than their architecture diagrams suggest.</p>
+
+    <p>This is not a prediction that data centres will inevitably become primary bombing targets. Nor does it suggest that cloud providers have failed to account for physical security threats.</p>
+
+    <p>Rather, it highlights an important reality: digital infrastructure is part of physical national infrastructure, and its protection must be considered accordingly.</p>
+
+    <p>The assumption that geographical redundancy automatically guarantees continuity also deserves scrutiny.</p>
+
+    <p>If supposedly independent systems share telecommunications routes, electricity dependencies, identity services or administrative control planes, their resilience may be considerably weaker than their architecture diagrams suggest.</p>
 
     <div class="adslot adslot--rect" aria-hidden="true"><span class="ad-label">Advertisement</span><ins class="adsbygoogle" style="display:block" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
 
     <h2>So, Should We Abandon the Cloud?</h2>
+
     <p>Absolutely not.</p>
+
     <p>Cloud computing remains one of the most transformative developments in modern information technology. Its benefits are substantial, and for many organisations, a properly architected cloud environment offers better security and resilience than maintaining equivalent infrastructure independently.</p>
-    <p>The lesson, therefore, is not to abandon the cloud: it is to stop treating the cloud as an infallible destination. Organisations must reconsider what genuine business continuity means in an increasingly cloud-dependent world.</p>
+
+    <p>The lesson, therefore, is not to abandon the cloud: it is to stop treating the cloud as an infallible destination.</p>
+
+    <p>Organisations must reconsider what genuine business continuity means in an increasingly cloud-dependent world.</p>
+
     <p>A resilient organisation should consider six essential architectural pillars:</p>
+
     <ol>
       <li><strong>Multi-cloud and hybrid-cloud strategies:</strong> Critical workloads should not automatically depend on a single provider. Where the business impact justifies the investment, organisations should consider alternative cloud providers, hybrid infrastructure and independent recovery environments.</li>
       <li><strong>Independent data backups:</strong> Critical information should have independently recoverable backups, with appropriate offline or immutable copies. Backup availability should not depend entirely on the same administrative credentials, identity infrastructure or cloud environment being protected.</li>
@@ -252,14 +400,31 @@
     </div>
 
     <h2>The Final Question: Who Really Owns Your Digital Continuity?</h2>
+
     <p>The latest Microsoft outage, following significant disruptions involving AWS and Google Cloud, presents an opportunity to reconsider our relationship with cloud computing.</p>
-    <p>We have spent years encouraging organisations to migrate their infrastructure, digitise their operations and embrace interconnected technology ecosystems. We have celebrated efficiency, scalability and the convenience of accessing everything from virtually anywhere.</p>
+
+    <p>We have spent years encouraging organisations to migrate their infrastructure, digitise their operations and embrace interconnected technology ecosystems.</p>
+
+    <p>We have celebrated efficiency, scalability and the convenience of accessing everything from virtually anywhere.</p>
+
     <p>But perhaps we have not spent enough time asking a fundamental question: What happens when the infrastructure that makes everything accessible suddenly becomes inaccessible?</p>
-    <p>For organisations operating in critical sectors, the implications are particularly serious. For African businesses and governments, the question is even more consequential. As our economies accelerate their digital transformation, we must ensure that our pursuit of technological advancement does not inadvertently create new forms of systemic vulnerability and external dependency.</p>
+
+    <p>For organisations operating in critical sectors, the implications are particularly serious.</p>
+
+    <p>For African businesses and governments, the question is even more consequential. As our economies accelerate their digital transformation, we must ensure that our pursuit of technological advancement does not inadvertently create new forms of systemic vulnerability and external dependency.</p>
+
     <p>Digital sovereignty is not simply about owning servers or establishing local data centres. It is also about maintaining the capacity to access, protect, recover and continue operating our essential systems when external infrastructure becomes unavailable.</p>
-    <p>The cloud is powerful, but it is not invincible. Microsoft, AWS and Google have all demonstrated that even the most sophisticated infrastructure can experience failures with global consequences.</p>
+
+    <p>The cloud is powerful, but it is not invincible.</p>
+
+    <p>Microsoft, AWS and Google have all demonstrated that even the most sophisticated infrastructure can experience failures with global consequences.</p>
+
     <p>Whether the next major disruption comes from an engineering error, a configuration failure, a cyberattack, an infrastructure accident or a physical attack against critical facilities, the fundamental challenge remains the same: We must build systems that can survive the failure of the systems upon which they depend.</p>
-    <p>Because putting all your eggs in one basket is a questionable strategy. Putting all your eggs in someone else's basket, hundreds or thousands of kilometres away, and assuming that basket can never fall, is an even more questionable one.</p>
+
+    <p>Because putting all your eggs in one basket is a questionable strategy.</p>
+
+    <p>Putting all your eggs in someone else's basket, hundreds or thousands of kilometres away, and assuming that basket can never fall, is an even more questionable one.</p>
+
     <p>The future belongs not merely to organisations that successfully migrate to the cloud, but to those that remain operational when the cloud goes dark.</p>
 
     <div class="partner-banner-wrap reveal" role="region" aria-label="NordVPN partner offer">

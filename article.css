@@ -166,12 +166,18 @@
 }
 
 /* ---- High-Density Tables (GEO / AEO / AIO) ---- */
-.table-wrap{margin:28px 0;overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:14px;border:1px solid var(--stroke);background:rgba(20,18,16,.6)}
-.article-table{width:100%;border-collapse:collapse;font-size:13.5px;line-height:1.55;text-align:left;color:var(--soft)}
-.article-table caption{font-family:var(--mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--ember);padding:14px 18px 8px;text-align:left;font-weight:700}
-.article-table th{background:rgba(255,255,255,.04);color:var(--cream);font-family:var(--mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;padding:12px 16px;border-bottom:1px solid var(--stroke);font-weight:700}
-.article-table td{padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.05);vertical-align:top}
+.table-wrap{margin:32px 0;overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:14px;border:1px solid var(--stroke);background:rgba(18,16,14,.88);box-shadow:0 8px 30px rgba(0,0,0,.35)}
+.article-table{width:100%;border-collapse:collapse;font-size:13.5px;line-height:1.6;text-align:left;color:var(--soft);min-width:640px}
+.article-table caption{font-family:var(--mono);font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ember);padding:16px 20px 12px;text-align:left;font-weight:700;border-bottom:1px solid var(--stroke)}
+.article-table th{background:rgba(255,255,255,.06);color:var(--cream);font-family:var(--mono);font-size:10.5px;letter-spacing:1px;text-transform:uppercase;padding:14px 18px;border-bottom:1.5px solid var(--stroke2);border-right:1px solid rgba(255,255,255,.08);font-weight:700}
+.article-table th:last-child{border-right:none}
+.article-table td{padding:14px 18px;border-bottom:1px solid rgba(255,255,255,.08);border-right:1px solid rgba(255,255,255,.06);vertical-align:top}
+.article-table td:last-child{border-right:none}
 .article-table tr:last-child td{border-bottom:none}
+.article-table tr:hover td{background:rgba(255,255,255,.02)}
+.article-table .cell-title{display:block;font-weight:600;color:var(--cream);margin-bottom:4px;font-size:13.5px}
+.article-table .cell-desc{display:block;font-size:12.5px;color:var(--mute);line-height:1.5}
+.article-table .cell-desc a{font-size:12.5px}
 .article-table tr:hover td{background:rgba(255,255,255,.02)}
 .article-table code{font-size:12px;color:var(--ember)}
 .article-table strong{color:var(--cream)}
