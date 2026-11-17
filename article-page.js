@@ -54,27 +54,43 @@
     modal.addEventListener('click', function (e) { if (e.target === modal) closeM(); });
   }
 
-  /* ---- Consent + AdSense (only loads once configured and consented) ---- */
+  /* ---- Consent + AdSense (Consent Mode v2 + head verification) ---- */
   var CONFIG = { adsenseClient: 'ca-pub-9118555801196013' };
   var Store = {
     get: function (k, d) { try { var v = localStorage.getItem('h6_' + k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } },
     set: function (k, v) { try { localStorage.setItem('h6_' + k, JSON.stringify(v)); } catch (e) { } }
   };
-  var consent = document.getElementById('consent'), adsLoaded = false;
+  var consent = document.getElementById('consent'), adsLoaded = !!document.querySelector('script[src*="adsbygoogle.js"]');
+
+  function updateConsentSignal(mode) {
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { window.dataLayer.push(arguments); }
+    if (mode === 'all') {
+      gtag('consent', 'update', {
+        ad_storage: 'granted',
+        ad_user_data: 'granted',
+        ad_personalization: 'granted',
+        analytics_storage: 'granted'
+      });
+    } else {
+      window.adsbygoogle = window.adsbygoogle || [];
+      window.adsbygoogle.requestNonPersonalizedAds = 1;
+      gtag('consent', 'update', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied'
+      });
+    }
+  }
 
   function loadAds(mode) {
+    updateConsentSignal(mode);
     if (adsLoaded || !CONFIG.adsenseClient) return;
     adsLoaded = true;
-    if (mode === 'essential') { window.adsbygoogle = window.adsbygoogle || []; window.adsbygoogle.requestNonPersonalizedAds = 1; }
     var s = document.createElement('script');
     s.async = true; s.crossOrigin = 'anonymous';
     s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + encodeURIComponent(CONFIG.adsenseClient);
-    s.onload = function () {
-      document.querySelectorAll('ins.adsbygoogle').forEach(function (ins) {
-        ins.setAttribute('data-ad-client', CONFIG.adsenseClient);
-        try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch (e) { }
-      });
-    };
     document.head.appendChild(s);
   }
 
@@ -83,11 +99,13 @@
     if (consent) consent.classList.remove('show');
     if (v === 'all') loadAds('all');
     else if (v === 'essential') loadAds('essential');
+    else updateConsentSignal('reject');
   }
 
   var c = Store.get('consent', null);
   if (c === 'all') loadAds('all');
   else if (c === 'essential') loadAds('essential');
+  else if (c === 'reject') updateConsentSignal('reject');
   else if (consent) consent.classList.add('show');
 
   var ca = document.getElementById('c-accept'), ce = document.getElementById('c-ess'), cr = document.getElementById('c-rej');
