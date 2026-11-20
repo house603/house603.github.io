@@ -32,6 +32,7 @@ The security practice is led by certified practitioners (CISSP, CISM, ISO 27001/
 - Infrastructure Cost Estimator: https://house603.com/articles/#tools (Browser-based modeler for monthly vCPU, RAM, block storage, and network egress costs with right-sizing projections and FinOps methodology).
 
 ## Technical field notes and engineering guides
+- Piracy or Protest?: https://house603.com/technuggets/piracy-or-protest/ (Legal distinction between theft and copyright infringement, revocable software licences under California AB 2426, and cybersecurity risks illustrated by fake GTA 6 PC crack malware campaigns).
 - Implementing ISO/IEC 42001: A Practical AI Governance Checklist for Engineering Teams: https://house603.com/technuggets/iso-42001-ai-governance-checklist/
 - SOC 2 Readiness Without Paperwork Theatre: Technical Controls That Pass Audits: https://house603.com/technuggets/soc2-type-ii-engineering-controls/
 - API Security Hardening in Production: Auth Boundaries, Rate Limits, and Schema Validation: https://house603.com/technuggets/api-security-hardening-guide/
